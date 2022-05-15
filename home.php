@@ -5,20 +5,20 @@ session_start();
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     if (isset($_POST['username']) && isset($_POST['email'])) {
         $_SESSION['success'] = "Big Success";
-        $_SESSION['error'] = null;
+        unset($_SESSION['error']);
         header('Location: home.php');
         return;
     }
     if (isset($_POST['username'])) {
 
-            $_SESSION['success'] = null;
+            unset($_SESSION['success']);
             $_SESSION['error'] = "You must provide a username";
             header('Location: home.php');
             return;
         } 
     if (isset($_POST['email'])) {
 
-        $_SESSION['success'] = null;
+        unset($_SESSION['success']);
         $_SESSION['error'] = "You must provide an email address";
         header('Location: home.php');
         return;
@@ -46,9 +46,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     <?php
     if (isset($_SESSION['error'])) {
         echo '<p style="color:red">' . $_SESSION['error'] . '</p>\n';
+        unset($_SESSION['error']);
     }
     if (isset($_SESSION['success'])) {
         echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+        unset($_SESSION['success']);
     }
     ?>
 
@@ -60,6 +62,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             <?php
             if (isset($_SESSION['success'])) {
                 echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+                unset($_SESSION['success']);
             } else {
                 require_once('login.php');
             }
