@@ -1,16 +1,31 @@
 <?php
-require_once('util.php');
 require_once('pdo.php');
 session_start();
-if (!isset($_SESSION['username'])) {
+
+if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     if (isset($_POST['username']) && isset($_POST['email'])) {
-        updateUser($_POST['username'], $_POST['email'], $conn);
-        header("Locate: home.php");
-        return;  
+        $_SESSION['success'] = "Big Success";
+        $_SESSION['error'] = null;
+        header('Location: home.php');
+        return;
+    }
+    if (isset($_POST['username'])) {
+
+            $_SESSION['success'] = null;
+            $_SESSION['error'] = "You must provide a username";
+            header('Location: home.php');
+            return;
+        } 
+    if (isset($_POST['email'])) {
+
+        $_SESSION['success'] = null;
+        $_SESSION['error'] = "You must provide an email address";
+        header('Location: home.php');
+        return;
+        }
+    
     }
     
-    
-}
 ?>
 
 <!DOCTYPE html>

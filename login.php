@@ -1,5 +1,5 @@
 <?php
-echo '<form method="post">
+echo '<form method="post" action="home.php">
 <label for="username">name:  </label>
 <input type="text" id="username" name="username"><br><br>
 <label for="email">Email:  </label>
