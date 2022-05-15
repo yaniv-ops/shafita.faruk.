@@ -47,7 +47,7 @@ if ( !isset($_SESSION['username'])) {
                 echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
                 }
             else {
-                require_once('form.php');
+                require_once('login.php');
             }    
             ?>
         </div>
