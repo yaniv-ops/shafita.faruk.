@@ -4,12 +4,12 @@ require_once('pdo.php');
 session_start();
 if (!isset($_SESSION['username'])) {
     if (isset($_POST['username']) && isset($_POST['email'])) {
-        echo "<h1>Hooray</h1>";
         updateUser($_POST['username'], $_POST['email'], $conn);
-        $_SESSION['username'] = $_POST['username'];
-        header('Location: home.php');
-        return;
+        header("Locate: home.php");
+        return;  
     }
+    
+    
 }
 ?>
 
