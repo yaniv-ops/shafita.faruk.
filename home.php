@@ -1,10 +1,10 @@
 <?php
-require_once "pdo.php";
-session_start();
+require_once('util.php');
+require_once('pdo.php');
+session_start(); 
 if ( !isset($_SESSION['username'])) {
     if ( isset($_POST['username']) && isset($_POST['email']) ) {
-        $_SESSION['username'] = $_POST['username'];
-        $_SESSION['success'] = $_POST['username'] . " " . "Logged in.";
+        updateUser($_POST['username'], $_POST['email'], $conn);
         header('Location: home.php');
         return;
 
@@ -30,7 +30,7 @@ if ( !isset($_SESSION['username'])) {
     <?php
     if (isset($_SESSION['error'])) {
         echo '<p style="color:red">' . $_SESSION['error'] . '</p>\n';
-        unset($_SESSION['error']);
+        
     }
     if (isset($_SESSION['success'])) {
         echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";    
@@ -48,6 +48,7 @@ if ( !isset($_SESSION['username'])) {
                 }
             else {
                 require_once('login.php');
+                
             }    
             ?>
         </div>

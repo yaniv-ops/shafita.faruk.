@@ -1,4 +1,10 @@
 <?php
-echo "<table><thead><tr><th>Name</th><th>Email</th></tr></thead><tbody>";
+echo '<form method="post">';
+echo '<label for="username">name:  </label>';
+echo '<input type="text" id="username" name="username"><br><br>';
+echo '<label for="email">Email:  </label>';
+echo '<input type="email" id="email" name="email"><br><br>';
+echo '<input type="submit" value="Submit">';
 echo '<h1>OKKKKKKKK</h1>';
-echo "</tbody></table>";
+echo '</tbody></table>';
+echo '</form>';
