@@ -1,0 +1,64 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    text-align: center;
+    background-image: url("https://www.runescape.com/img/rsp777/bg2.jpg");
+    background-repeat: repeat-y;
+    background-position: center;
+    
+
+     }
+
+h1 {
+    font-size: 400%;
+    color: whitesmoke;
+
+    }
+
+p {
+    color: white;
+    }    
+
+#scribble-top {
+    font-size: 300%;
+    color: yellowgreen;
+    position: relative;
+    font-family: 'Oleo Script Swash Caps', cursive;
+    bottom: 80px;
+    }  
+
+.wrapped-content {
+
+    width: 50%;
+    margin: auto;
+    
+    }
+
+.scroll {
+        width: 80%;
+        position: relative;
+        z-index: 10;
+    }
+
+.contents-table {
+    width: 80%;
+    background-image: url('https://www.runescape.com/img/rsp777/scroll/backdrop_745.gif');
+    background-position: center;
+    position: relative;
+    background-repeat: repeat-y;
+    margin: auto;
+    padding: 50px 0;
+    bottom: 25px;
+}
+
+
+
+
+/* small devices (phones, 900px and down) */
+@media only screen and (max-width: 900px) {
+    .wrapped-content {
+        width: 100%;
+    }
+    } 
