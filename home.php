@@ -3,7 +3,7 @@ require_once('pdo.php');
 session_start();
 
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
-    if (isset($_POST['username']) && isset($_POST['email'])) {
+    if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['email']) && !empty($_POST['email']))) {
         $_SESSION['success'] = "Big Success";
         unset($_SESSION['error']);
         header('Location: home.php');
