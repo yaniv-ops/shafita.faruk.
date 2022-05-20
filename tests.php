@@ -1,18 +1,23 @@
 <?php
-if (!isset($_SESSION['username']) && isset($_POST['username']) && isset($_POST['email'])) {
-        updateUser($_POST['username'], $_POST['email'], $conn);
-        header("Locate: home.php");
-        return;
-}
-     elseif (!isset($_POST['username'])) {
-            $_SESSION['error'] = "You must provide a username";
-            header('Locate: home.php');
-            return;
+    foreach ($rows as $row) {
+        if ($row['username'] == "1" && $row['email'] == "1@1") {
+            unset($_SESSION['error']);
+            $_SESSION['success'] = $username . " " . "Logged in.";
+            $_SESSION['username'] = $username;
+            echo "<h1 >" . $_SESSION['success'] . "</h1>";
+            break;
+        } elseif ($username == "yaniv") {
+            $_SESSION['error'] = "Username is used!";
+            break;
+        } elseif ($row['email'] == $email) {
+            $_SESSION['error'] = "Email already registerd";
+            break;
         } else {
-        $_SESSION['error'] = "You must provide an email address";
-        header('Locate: home.php');
-        return;
+            $_SESSION['error'] = "not Registered";
         }
     }
+
+
+    return;
 
 ?>

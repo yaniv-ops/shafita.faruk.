@@ -4,33 +4,32 @@ require_once('util.php');
 session_start();
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['email']) && !empty($_POST['email']))) {
-        
+
         updateUser($_POST['username'], $_POST['email'], $conn);
         header('Location: home.php');
         return;
-    
-    } if (isset($_POST['username']) && !empty($_POST['username'])) {
+    }
+    if (isset($_POST['username']) && !empty($_POST['username'])) {
 
-           
-            $_SESSION['error'] = "You must provide an email address";
-            header('Location: home.php');
-            return;
-        } if (isset($_POST['email']) && !empty($_POST['email'])) {
 
-        
+        $_SESSION['error'] = "You must provide an email address";
+        header('Location: home.php');
+        return;
+    }
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+
+
         $_SESSION['error'] = "You must provide a username address";
         header('Location: home.php');
         return;
-
-        } if (isset($_POST['username']) && empty($_POST['username']) && isset($_POST['email']) && empty($_POST['email'])) {
-            $_SESSION['error'] = "You must provide an email and a username";
-            header('Location: home.php');
-            return;   
-        }
-  
-    
     }
-    
+    if (isset($_POST['username']) && empty($_POST['username']) && isset($_POST['email']) && empty($_POST['email'])) {
+        $_SESSION['error'] = "You must provide an email and a username";
+        header('Location: home.php');
+        return;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +50,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     <?php
     if (isset($_SESSION['error'])) {
         echo '<p style="color:red">' . $_SESSION['error'] . '</p>\n';
-        unset($_SESSION['error']);
     }
     if (isset($_SESSION['success'])) {
         echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
-        unset($_SESSION['success']);
     }
     ?>
 
@@ -68,15 +65,30 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             if (isset($_SESSION['success'])) {
                 echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
                 unset($_SESSION['success']);
-            } else {
+            } elseif (isset($_SESSION['error'])) {
 
+                if ($_SESSION['error'] === "Empty Database") {
+                    echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
+                    echo '<h1>Would you Like to register as a new user?</h1>';
+                    echo '<button><a href="home.php">Press</a></button>';
+                    echo '<button>Quit</button>';
+                    unset($_SESSION['error']);
+                    return;
+                } else {
+                    unset($_SESSION['error']);
+                }
                 
-                require_once('login.php');
-                
+                    
+                } else {
+                    unset($_SESSION['error']);
+                    require_once('login.php');
+                    return;
             }
             ?>
         </div>
     </div>
+    <script type="text/javascript" src="jquery.min.js">
+    </script>
     <script src="index.js"></script>
 </body>
 
