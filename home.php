@@ -54,6 +54,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     if (isset($_SESSION['success'])) {
         echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
     }
+    if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
+        echo '<p style="color:white">' . $_SESSION['username'] . "</p>\n";
+    }
     ?>
 
     <h1>Slo-Rocking Horses</h1>
@@ -72,18 +75,22 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo '<h1>Would you Like to register as a new user?</h1>';
                     echo '<button><a href="home.php">Press</a></button>';
                     echo '<button>Quit</button>';
-                    unset($_SESSION['error']);
                     return;
                 } else {
+                    
                     unset($_SESSION['error']);
+                    require_once('login.php');
+                    return;
                 }
                 
                     
                 } else {
+                    
                     unset($_SESSION['error']);
                     require_once('login.php');
                     return;
             }
+            
             ?>
         </div>
     </div>

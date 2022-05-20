@@ -8,7 +8,7 @@ function updateUser($username, $email, $conn)
     if (empty($rows)) {
         $_SESSION['error'] = "Empty Database";
         $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
+        $_SESSION['email'] = $email; 
         return;    }
 
     foreach ($rows as $row) {
