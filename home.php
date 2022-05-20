@@ -86,7 +86,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     
                 } else {
                     
-                    unset($_SESSION['error']);
+                    
                     require_once('login.php');
                     return;
             }
