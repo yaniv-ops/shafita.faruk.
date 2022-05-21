@@ -10,11 +10,7 @@ function updateUser($username, $email, $conn)
         $_SESSION['error'] = "No Data at all";
         return;
     }
-    if (empty($rows)) {
-        $_SESSION['error'] = "Empty Database";
-        $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email; 
-        return;    }
+    
 
     foreach ($rows as $row) {
         if ($username === $row['username'] && $email === $row['email']) {
@@ -30,8 +26,8 @@ function updateUser($username, $email, $conn)
             return;
         }
 
-
-    }        
+        $_SESSION['error'] = "New Fucking user";
+    }   return;     
 }
 
 
