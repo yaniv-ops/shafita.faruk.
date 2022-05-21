@@ -10,13 +10,15 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             header('Location: home.php');
             return;
 
-        } else {updateUser($_POST['username'], $_POST['email'], $conn);
-        header('Location: home.php');
-        return;
-                }
+        } else {
+            updateUser($_POST['username'], $_POST['email'], $conn);
+            header('Location: home.php');
+            return;
+                } 
+     header('Location: home.php');           
      return;           
 
-    }
+    } 
     if (isset($_POST['username']) && !empty($_POST['username'])) {
 
 
@@ -78,10 +80,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 unset($_SESSION['success']);
             } elseif (isset($_SESSION['error'])) {
 
-                if ($_SESSION['error'] == "Empty Database") {
+                if ($_SESSION['error'] == "No Data at all") {
 
                     $username = $_SESSION['username'];
                     $email = $_SESSION['email'];
+                    session_destroy();
                     echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
                     echo '<h1>Would you Like to register as a new user?</h1>';
                     echo '<form method="post" action="home.php">
@@ -101,6 +104,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 
                     
                 } 
+                require_once('login.php');
+                    
             
             ?>
         </div>

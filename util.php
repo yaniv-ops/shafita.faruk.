@@ -5,6 +5,11 @@ function updateUser($username, $email, $conn)
 
     $sql = $conn->query("SELECT * FROM users");
     $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $nRows = $conn->query("select count(*) from users")->fetchColumn();
+    if ($nRows === "1") {
+        $_SESSION['error'] = "No Data at all";
+        return;
+    }
     if (empty($rows)) {
         $_SESSION['error'] = "Empty Database";
         $_SESSION['username'] = $username;
