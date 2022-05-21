@@ -27,6 +27,18 @@ function updateUser($username, $email, $conn)
 
 
     }        
+}
 
-return;
+
+function newUser($username, $email, $conn) {
+    $sql = "INSERT INTO users (username, email)
+                VALUES (:username, :email)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(
+        ':username' => $username,
+        ':email' => $email));
+    $_SESSION['success'] = "User has been added!";
+    return;
+    
+    
 }

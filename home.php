@@ -5,9 +5,17 @@ session_start();
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['email']) && !empty($_POST['email']))) {
 
-        updateUser($_POST['username'], $_POST['email'], $conn);
+        if (isset($_POST['new_user']) && $_POST['new_user'] === "true") {
+            newUser($_POST['username'], $_post['email'], $conn);
+            header('Location: home.php');
+            return;
+
+        } else {updateUser($_POST['username'], $_POST['email'], $conn);
         header('Location: home.php');
         return;
+                }
+     return;           
+
     }
     if (isset($_POST['username']) && !empty($_POST['username'])) {
 
@@ -70,10 +78,18 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 unset($_SESSION['success']);
             } elseif (isset($_SESSION['error'])) {
 
-                if ($_SESSION['error'] === "Empty Database") {
+                if ($_SESSION['error'] == "Empty Database") {
+
+                    $username = $_SESSION['username'];
+                    $email = $_SESSION['email'];
                     echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
                     echo '<h1>Would you Like to register as a new user?</h1>';
-                    echo '<button><a href="home.php">Press</a></button>';
+                    echo '<form method="post" action="home.php">
+                    <input type="hidden" id="username"  name="username" value="<?php echo $username; ?>"><br><br>
+                    <input type="hidden" id="email" name="email" value="<?php echo $email; ?>"><br><br>
+                    <input type="hidden" id="new_user" name="new_user" value="true"><br><br>
+                    <input type="submit" name="submit">
+                    </form>';
                     echo '<button>Quit</button>';
                     return;
                 } else {
@@ -84,12 +100,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 }
                 
                     
-                } else {
-                    
-                    
-                    require_once('login.php');
-                    return;
-            }
+                } 
             
             ?>
         </div>
