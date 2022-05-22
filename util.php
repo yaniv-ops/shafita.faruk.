@@ -27,6 +27,8 @@ function updateUser($username, $email, $conn)
         }
 
         $_SESSION['error'] = "New Fucking user";
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
     }   return;     
 }
 

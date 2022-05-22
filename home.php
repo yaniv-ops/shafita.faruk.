@@ -6,7 +6,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['email']) && !empty($_POST['email']))) {
 
         if (isset($_POST['new_user']) && $_POST['new_user'] === "true") {
-            newUser($_POST['username'], $_post['email'], $conn);
+            newUser($_POST['username'], $_POST['email'], $conn);
             header('Location: home.php');
             return;
 
@@ -80,19 +80,23 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 unset($_SESSION['success']);
             } elseif (isset($_SESSION['error'])) {
 
-                if ($_SESSION['error'] == "No Data at all") {
+                if ($_SESSION['error'] == "New Fucking user") {
 
                     $username = $_SESSION['username'];
                     $email = $_SESSION['email'];
                     session_destroy();
                     echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
+                    echo '<p style="color:purple">' . $username . "</p>\n";
                     echo '<h1>Would you Like to register as a new user?</h1>';
-                    echo '<form method="post" action="home.php">
-                    <input type="hidden" id="username"  name="username" value="<?php echo $username; ?>"><br><br>
-                    <input type="hidden" id="email" name="email" value="<?php echo $email; ?>"><br><br>
-                    <input type="hidden" id="new_user" name="new_user" value="true"><br><br>
-                    <input type="submit" name="submit">
-                    </form>';
+                    echo "<form method='post' action='home.php'>";
+                    echo '<input type="hidden" id="username"  name="username" value="' . $username .'">"';
+                    echo "<br><br>";
+                    echo '<input type="hidden" id="email" name="email" value="' . $email . '">"';
+                    echo "<br><br>";
+                    echo "<input type='hidden' id='new_user' name='new_user' value='true'>";
+                    echo "<br><br>";
+                    echo "<input type='submit' name='submit'>";
+                    echo "</form>";
                     echo '<button>Quit</button>';
                     return;
                 } else {
