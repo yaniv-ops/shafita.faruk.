@@ -89,9 +89,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo '<p style="color:purple">' . $username . "</p>\n";
                     echo '<h1>Would you Like to register as a new user?</h1>';
                     echo "<form method='post' action='home.php'>";
-                    echo '<input type="hidden" id="username"  name="username" value="' . $username .'">"';
+                    echo '<input type="hidden" id="username"  name="username" value=' . $username .'>';
                     echo "<br><br>";
-                    echo '<input type="hidden" id="email" name="email" value="' . $email . '">"';
+                    echo '<input type="hidden" id="email" name="email" value=' . $email . '>';
                     echo "<br><br>";
                     echo "<input type='hidden' id='new_user' name='new_user' value='true'>";
                     echo "<br><br>";
