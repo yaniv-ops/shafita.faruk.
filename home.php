@@ -10,6 +10,10 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             header('Location: home.php');
             return;
 
+        } elseif (isset($_POST['quit']) && $_post['quit']='true') {
+            session_destroy();
+            header('Locatio: home.php');
+            return;
         } else {
             updateUser($_POST['username'], $_POST['email'], $conn);
             header('Location: home.php');
@@ -87,17 +91,17 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     session_destroy();
                     echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
                     echo '<p style="color:purple">' . $username . "</p>\n";
-                    echo '<h1>Would you Like to register as a new user?</h1>';
+                    echo '<h1>Would you Like to register as a new user?</h1>'; 
                     echo "<form method='post' action='home.php'>";
                     echo '<input type="hidden" id="username"  name="username" value=' . $username .'>';
-                    echo "<br><br>";
                     echo '<input type="hidden" id="email" name="email" value=' . $email . '>';
-                    echo "<br><br>";
                     echo "<input type='hidden' id='new_user' name='new_user' value='true'>";
-                    echo "<br><br>";
                     echo "<input type='submit' name='submit'>";
                     echo "</form>";
-                    echo '<button>Quit</button>';
+                    echo "<form method='post' action='home.php'";
+                    echo "<input type='hidden' id='quit' name='quit' value='true'>";
+                    echo "<input type='submit' name='Quit'>";
+                    echo "</form>";
                     return;
                 } else {
                     
