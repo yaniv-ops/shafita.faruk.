@@ -12,7 +12,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 
         } elseif (isset($_POST['quit']) && $_post['quit']='true') {
             session_destroy();
-            header('Locatio: home.php');
+            header('Location: home.php');
             return;
         } else {
             updateUser($_POST['username'], $_POST['email'], $conn);
@@ -58,6 +58,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -93,6 +95,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     session_destroy();
                     echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
                     echo '<p style="color:purple">' . $username . "</p>\n";
+                    echo '<p style="color:purple">' . $email . "</p>\n";
                     echo '<h1>Would you Like to register as a new user?</h1>'; 
                     echo "<form method='post' action='home.php'>";
                     echo '<input type="hidden" id="username"  name="username" value=' . $username .'>';
@@ -110,7 +113,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         $username = $_SESSION['username'];
                         $msg = $_SESSION['success'] = 'No offers yet';
                         echo "<h1>$msg</h1>";
-                        header('Locatin: home.php');
+                        echo ("<p>Add Job offer<input type='submit' id='addJob' value='+'><div id='position_fields'></div></p>");
+                        echo ('<script type="text/javascript" src="add_job.js"></script>');
                         return;
                 } else {
                     
@@ -125,11 +129,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     
             
             ?>
+
+            
         </div>
     </div>
-    <script type="text/javascript" src="jquery.min.js">
-    </script>
-    <script src="index.js"></script>
+            
 </body>
 
 </html>
