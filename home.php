@@ -81,10 +81,12 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             <?php
             if (isset($_SESSION['success'])) {
                 echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+                $row = showUserdata($_SESSION['username'], $conn);
+                echo "<h1>$row</h1>";
                 unset($_SESSION['success']);
             } elseif (isset($_SESSION['error'])) {
 
-                if ($_SESSION['error'] == "New Fucking user") {
+                if ($_SESSION['error'] == "Welcome New Adventurer") {
 
                     $username = $_SESSION['username'];
                     $email = $_SESSION['email'];
@@ -103,6 +105,13 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo "<input type='submit' name='Quit'>";
                     echo "</form>";
                     return;
+                } elseif ($_SESSION['error'] == "Bad value for username") {
+                        unset($_SESSION['error']);
+                        $username = $_SESSION['username'];
+                        $msg = $_SESSION['success'] = 'No offers yet';
+                        echo "<h1>$msg</h1>";
+                        header('Locatin: home.php');
+                        return;
                 } else {
                     
                     unset($_SESSION['error']);

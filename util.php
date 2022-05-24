@@ -15,6 +15,7 @@ function updateUser($username, $email, $conn)
     foreach ($rows as $row) {
         if ($username === $row['username'] && $email === $row['email']) {
             $_SESSION['success'] = "Welcome Adventurer";
+            $_SESSION['username'] = $username;
             return;
         }
         if ($username === $row['username']) {
@@ -26,7 +27,7 @@ function updateUser($username, $email, $conn)
             return;
         }
 
-        $_SESSION['error'] = "New Fucking user";
+        $_SESSION['error'] = "Welcome New Adventurer";
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
     }   return;     
@@ -40,8 +41,23 @@ function newUser($username, $email, $conn) {
     $stmt->execute(array(
         ':username' => $username,
         ':email' => $email));
-    $_SESSION['success'] = "User has been added!";
+    $_SESSION['success'] = "Adventurer has been added!";
     return;
     
     
+}
+
+
+function showUserdata($username, $conn) {
+    $stmt = $conn->prepare("SELECT * FROM job_offers where user= :xyz ");
+    $stmt->execute(array(":xyz" => $username ));
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row === false ) {
+        $_SESSION['error'] = "Bad value for username";
+        $_SESSION['username'] = $username;
+        header('Location: home.php');
+        return;
+    }
+    header('Locatin: home.php');
+    return $row;
 }
