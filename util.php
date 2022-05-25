@@ -13,16 +13,16 @@ function updateUser($username, $email, $conn)
     
 
     foreach ($rows as $row) {
-        if ($username === $row['username'] && $email === $row['email']) {
+        if ($username === htmlentities($row['username']) && $email === htmlentities($row['email'])) {
             $_SESSION['success'] = "Welcome Adventurer";
             $_SESSION['username'] = $username;
             return;
         }
-        if ($username === $row['username']) {
+        if ($username === htmlentities($row['username'])) {
             $_SESSION['error'] = "Username is already taken";
             return;
         }
-        if ($email === $row['email']) {
+        if ($email === htmlentities($row['email'])) {
             $_SESSION['error'] = "Email is being used";
             return;
         }
