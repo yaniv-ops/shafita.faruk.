@@ -3,6 +3,11 @@ require_once('pdo.php');
 require_once('util.php');
 session_start();
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
+    if ($_POST['submit'] === "jobs_submited") {
+        echo ("<h1>Success</h1>");
+        
+
+    }
     if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['email']) && !empty($_POST['email']))) {
 
         if (isset($_POST['new_user']) && $_POST['new_user'] === "true") {
@@ -10,7 +15,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             header('Location: home.php');
             return;
 
-        } elseif (isset($_POST['quit']) && $_post['quit']='true') {
+        } elseif (isset($_POST['quit']) && $_post['quit'] ==='true') {
             session_destroy();
             header('Location: home.php');
             return;
@@ -112,8 +117,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         unset($_SESSION['error']);
                         $username = $_SESSION['username'];
                         $msg = $_SESSION['success'] = 'No offers yet';
+                        session_destroy();
                         echo "<h1>$msg</h1>";
-                        echo ("<p>Add Job offer<input type='submit' id='addJob' value='+'><div id='position_fields'></div></p>");
+                        echo ("<form method='post'><p>Add Job offer: <input type='submit' id='addJob' value='+'><div id='position_fields'></div></p><input type='submit' name='submit' id='addAlljobs' value='jobs_submited'></form>");
                         echo ('<script type="text/javascript" src="add_job.js"></script>');
                         return;
                 } else {

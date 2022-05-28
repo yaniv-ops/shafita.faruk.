@@ -61,3 +61,6 @@ function showUserdata($username, $conn) {
     header('Locatin: home.php');
     return $row;
 }
+
+
+function flash_messages()
