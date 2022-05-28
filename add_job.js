@@ -13,7 +13,7 @@ $(document).ready(function () {
         window.console && console.log("Adding Job offer:" + countpos);
         $('#position_fields').append(
             '<div id="job_offer' + countpos + '"> \
-            <p>Job Position: <input type="text" name="year'+ countpos + '" value=""/> \
+            <p>Job Position: <input type="text" id="pos' + countpos + '" name="year'+ countpos + '" value=""/> \
             <span class="error">Field is required</span> \
             <input type=""button" value="-" \
                 onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></p> \
