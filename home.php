@@ -119,7 +119,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         $msg = $_SESSION['success'] = 'No offers yet';
                         session_destroy();
                         echo "<h1>$msg</h1>";
-                        echo ("<form method='post'><p>Add Job offer: <input type='submit' id='addJob' value='+'><div id='position_fields'></div></p><input type='submit' name='submit' id='addAlljobs' value='jobs_submited'></form>");
+                        echo ("<form method='post'><p>Add Job offer: <input type='submit' id='addJob' value='+'><span class='error'>One contact Field required</span><div id='position_fields'></div></p><input type='submit' name='submit' id='addAlljobs' value='jobs_submited'></form>");
                         echo ('<script type="text/javascript" src="add_job.js"></script>');
                         return;
                 } else {

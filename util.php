@@ -62,5 +62,3 @@ function showUserdata($username, $conn) {
     return $row;
 }
 
-
-function flash_messages()
