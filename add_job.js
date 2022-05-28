@@ -33,13 +33,15 @@ $(document).ready(function () {
     $('#job_offer_form').submit(function (event) {
         event.preventDefault();
         {
-            $('.error').on("input", function () {
-                var input = $(this);
-                var is_name = input.val();
-                if (is_name) { input.removeClass("invalid").addClass("valid"); }
-                else { input.removeClass("valid").addClass("invalid"); }
+            for (i = 0; i < countpos; i++) {
+                $('.error').on("input", function () {
+                    var input = $(this);
+                    var is_name = input.val();
+                    if (is_name) { input.removeClass("invalid").addClass("valid"); }
+                    else { input.removeClass("valid").addClass("invalid"); }
 
-            });
+                });
+            }
 
         }
     });
