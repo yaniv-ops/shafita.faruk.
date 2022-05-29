@@ -26,24 +26,12 @@ $(document).ready(function () {
             <span class="error">Field is required</span> \
             <p><input type="text" name="year'+ countpos + '" value=""/>Position<input type="text" name="year' + countpos + '" value=""/></p> \
             </div>');
+        $("#pos"+countpos).replaceWith("<p>Socks</p>");
+      
 
 
 
     });
-    $('#job_offer_form').submit(function (event) {
-        event.preventDefault();
-        {
-            for (i = 0; i < countpos; i++) {
-                $('.error').on("input", function () {
-                    var input = $(this);
-                    var is_name = input.val();
-                    if (is_name) { input.removeClass("invalid").addClass("valid"); }
-                    else { input.removeClass("valid").addClass("invalid"); }
 
-                });
-            }
-
-        }
-    });
 
 });
