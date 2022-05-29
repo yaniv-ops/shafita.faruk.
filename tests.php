@@ -14,21 +14,22 @@
 <body>
     <p id="bacon">Add Job offer: <button id="addJob" onclick="addJob()">+</button></p>
     <div id='position_fields'></div>
-    <script>
-        countpos = 0;
+    <form method="post" action="">
+        <script>
+            countpos = 0;
 
-        function addJob() {
+            function addJob() {
 
 
-            document.getElementById("bacon").style.color = "red";
-            if (countpos >= 9) {
-                alert("Maximum of nine offers at a time please!");
-                return;
-            }
-            countpos++;
-            $('#position_fields').append(
+                document.getElementById("bacon").style.color = "red";
+                if (countpos >= 9) {
+                    alert("Maximum of nine offers at a time please!");
+                    return;
+                }
+                countpos++;
+                $('#position_fields').append(
 
-                '<div id="job_offer' + countpos + '"> \
+                    '<div id="job_offer' + countpos + '"> \
                 <p>Job Position: <input type="text" id="pos' + countpos + '" name="year' + countpos + '" value=""/> \
                 <span class="error">Field is required</span> \
                 <input type=""button" value="-" \
@@ -42,34 +43,8 @@
                 <span class="error">Field is required</span> \
                 <p><input type="text" name="year' + countpos + '" value=""/>Position<input type="text" name="year' + countpos + '" value=""/></p> \
                 </div>');
-        }
-    </script>
-    <form id="contact" method="post" action="">
-        <!-- Name -->
-        <div>
-            <label for="contact_name">Name:</label>
-            <input type="text" id="contact_name" name="name">
-            <span class="error">This field is required</span>
-        </div>
-        <!-- Email -->
-        <div>
-            <label for="contact_email">Email:</label>
-            <input type="email" id="contact_email" name="email">
-            <span class="error">A valid email address is required</span>
-        </div>
-        <!--Website -->
-        <div>
-            <label for="contact_website">Website:</label>
-            <input type="url" id="contact_website" name="website">
-            <span class="error">A valid url is required</span>
-        </div>
-        <!-- Message -->
-        <div>
-            <label for="contact_message">Message:</label>
-            <textarea id="contact_message" name="message"></textarea>
-            <span class="error">This field is required</span>
-        </div>
-        <!-- Submit Button -->
+            }
+        </script>
         <div id="contact_submit">
             <button type="submit">Submit</button>
         </div>
