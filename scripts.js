@@ -3,11 +3,8 @@
 
 
 $(document).ready(function () {
+    
 
-    $("form").submit(function( event ) {
-        alert( "Handler for .submit() called." );
-        event.preventDefault();
-      });
     //Detect that a user has started entering their name itno the name input
     // Name can't be blank
     $('#pos1').on('input', function () {
