@@ -1,0 +1,53 @@
+<script>
+    $(document).ready(function() {
+
+        $("#first_form").submit(function(e) {
+            e.preventDefault();
+            var first_name = $("#pos1").val();
+            $(".error").remove();
+            if (first_name.length < 1) {
+                $("#pos1").after('<span class="error">This field is required</span>');
+            }
+        });
+    });
+</script>
+
+<p id="bacon">Add Job offer: <button id="addJob" onclick="addJob()">+</button></p>
+<div id='position_fields'></div>
+<form id="first_form" method="post" action="">
+    <script>
+        countpos = 0;
+
+        function addJob() {
+
+
+            document.getElementById("bacon").style.color = "red";
+            if (countpos >= 9) {
+                alert("Maximum of nine offers at a time please!");
+                return;
+            }
+            countpos++;
+            $('#position_fields').append(
+
+                '<div id="job_offer' + countpos + '"> \
+                <p>Job Position: <input type="text" id="pos' + countpos + '" name="year' + countpos + '" value=""/> \
+                <span class="error">Field is required</span> \
+                <input type=""button" value="-" \
+                    onclick="$(\'#job_offer' + countpos + '\').remove();countpos--;return false;"></p> \
+                <p>Job Description: <textarea name="desc' + countpos + '" rows="8" cols="80"></textarea></p> \
+                <span class="error">Field is required</span> \
+                <p>Company Name: <input type="text" name="year' + countpos + '" value=""/>Company E-mail: <input type="text" name="year' + countpos + '" value=""/></p> \
+                <span class="error">Field is required</span> \
+                <p>Company Phone: <input type="text" name="year' + countpos + '" value=""/>Recruiter: <input type="text" name="year' + countpos + '" value=""/></p> \
+                <p>Recruiter E-mail: <input type="text" name="year' + countpos + '" value=""/>Recruiter Phone: <input type="text" name="year' + countpos + '" value=""/></p> \
+                <span class="error">Field is required</span> \
+                <p><input type="text" name="year' + countpos + '" value=""/>Position<input type="text" name="year' + countpos + '" value=""/></p> \
+                </div>');
+        }
+    </script>
+
+</form>
+<div id="contact_submit">
+    <button type="submit">Submit</button>
+</div>
+

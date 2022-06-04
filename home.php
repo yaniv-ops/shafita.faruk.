@@ -3,7 +3,7 @@ require_once('pdo.php');
 require_once('util.php');
 session_start();
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
-    if ($_POST['submit'] === "jobs_submited") {
+    if ((isset($_POST['submit']) && $_POST['submit'] === "jobs_submited")) {
         echo ("<h1>Success</h1>");
         
 
@@ -55,16 +55,16 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 <html lang="en">
 
 <head>
+<title>Form Validation</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="index.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="scripts.js"></script>
 </head>
 
 <body>
@@ -117,8 +117,18 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         unset($_SESSION['error']);
                         $username = $_SESSION['username'];
                         $msg = $_SESSION['success'] = 'No offers yet';
+                        unset($_SESSION['success']);
                         echo "<h1>$msg</h1>";
-                        require_once('tests.php');
+                        echo('<form id="first_form" method="post" action="health.php">');
+                        echo('<p id="bacon">Add Job offer: <button id="addJob" onclick="addJob()">+</button></p>');
+                        echo('<div id="position_fields"></div>');
+                        echo '<h1>what</h1>';
+                        echo('<input type="submit" name="submit">Submit</button>');
+                        echo('</form>');
+                        echo "<form method='post' action='home.php'";
+                        echo "<input type='hidden' id='quit' name='quit' value='true'>";
+                        echo "<input type='submit' name='Quit'>";
+                        echo "</form>";
                         return;
                 } else {
                     

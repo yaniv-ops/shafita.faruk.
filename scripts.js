@@ -1,60 +1,48 @@
-
-
-
-
+countpos = 0;
 $(document).ready(function () {
-    
+    window.console && console.log('Document ready called');
+    $('#addJob').click(function (event) {
+        event.preventDefault();
+        if (countpos >= 9) {
+            alert("Maximum of nine offers at a time please!");
+            return;
+        }
+        countpos++;
+        window.console && console.log("Adding Job offer:" + countpos);
+        $('#position_fields').append(
+            '<div id="job_offer' + countpos + '"> \
+            <p>Job Position: <input type="text" id="pos' + countpos + '" name="year' + countpos + '" value=""/> \
+            <span class="error">Field is required</span> \
+            <input type=""button" value="-" \
+                onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></p> \
+            <p>Job Description: <textarea name="desc'+ countpos + '" rows="8" cols="80"></textarea></p> \
+            <span class="error">Field is required</span> \
+            <p>Company Name: <input type="text" name="year'+ countpos + '" value=""/>Company E-mail: <input type="text" name="year' + countpos + '" value=""/></p> \
+            <span class="error">Field is required</span> \
+            <p>Company Phone: <input type="text" name="year'+ countpos + '" value=""/>Recruiter: <input type="text" name="year' + countpos + '" value=""/></p> \
+            <p>Recruiter E-mail: <input type="text" name="year'+ countpos + '" value=""/>Recruiter Phone: <input type="text" name="year' + countpos + '" value=""/></p> \
+            <span class="error">Field is required</span> \
+            <p><input type="text" name="year'+ countpos + '" value=""/>Position<input type="text" name="year' + countpos + '" value=""/></p> \
+            </div>');
 
-    //Detect that a user has started entering their name itno the name input
-    // Name can't be blank
-    $('#pos1').on('input', function () {
+
+    });
+    $("#pos" + countpos).on('input', function () {
         var input = $(this);
         var is_name = input.val();
-        if (is_name) { input.removeClass("invalid").addClass("valid"); }
-        else { input.removeClass("valid").addClass("invalid"); }
-    });
-
-    // Email must be an email
-    $('#contact_email').on('input', function () {
-        var input = $(this);
-        var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        var is_email = re.test(input.val());
-        if (is_email) { input.removeClass("invalid").addClass("valid"); }
-        else { input.removeClass("valid").addClass("invalid"); }
-    });
-    // Website must be a website
-    $('#contact_website').on('input', function () {
-        var input = $(this);
-        if (input.val().substring(0, 4) == 'www.') { input.val('http://www.' + input.val().substring(4)); }
-        var re = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])?/;
-        var is_url = re.test(input.val());
-        if (is_url) { input.removeClass("invalid").addClass("valid"); }
-        else { input.removeClass("valid").addClass("invalid"); }
-    });
-    // Message can't be blank
-    $('#contact_message').keyup(function (event) {
-        var input = $(this);
-        var message = $(this).val();
-        console.log(message);
-        if (message) { input.removeClass("invalid").addClass("valid"); }
-        else { input.removeClass("valid").addClass("invalid"); }
-    });
-    // After Form Submitted Validation
-    $("#contact_submit button").click(function (event) {
-        var form_data = $("#contact").serializeArray();
-        var error_free = true;
-        for (var input in form_data) {
-            var element = $("#contact_" + form_data[input]['name']);
-            var valid = element.hasClass("valid");
-            var error_element = $("span", element.parent());
-            if (!valid) { error_element.removeClass("error").addClass("error_show"); error_free = false; }
-            else { error_element.removeClass("error_show").addClass("error"); }
-        }
-        if (!error_free) {
-            event.preventDefault();
+        if (is_name) {
+            input.removeClass("invalid").addClass("valid");
         }
         else {
-            alert('No errors: Form will be submitted');
+            input.removeClass("valid").addClass("invalid");
         }
     });
+
+
+
+
 });
+
+
+
+
