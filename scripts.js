@@ -25,7 +25,7 @@ $(document).ready(function () {
             <span class="error">Field is required</span> \
             <p><input type="text" name="year'+ countpos + '" value=""/>Position<input type="text" name="year' + countpos + '" value=""/></p> \
             </div>');
-        $('#pos1').css("color", 'purple');
+        $("#pos"+ countpos).css("color", 'purple');
 
         
     });
