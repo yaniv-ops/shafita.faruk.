@@ -15,7 +15,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             header('Location: home.php');
             return;
 
-        } elseif (isset($_POST['quit']) && $_post['quit'] ==='true') {
+        } elseif (isset($_POST['quit']) && $_POST['quit'] ==='true') {
             session_destroy();
             header('Location: home.php');
             return;
@@ -123,7 +123,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         echo('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
                         echo('<div id="position_fields"></div>');
                         echo '<h1>what</h1>';
-                        echo('<input type="submit" name="submit" onclick="return doValidate();">Submit</button>');
+                        echo('<input type="submit" id="first_form_submit" name="submit" onclick="return doValidate();">Submit</button>');
                         echo('</form>');
                         echo "<form method='POST' action='home.php'";
                         echo "<input type='hidden' id='quit' name='quit' value='true'>";
