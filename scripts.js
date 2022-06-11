@@ -18,12 +18,14 @@ $(document).ready(function () {
                 onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></p> \
             <div><p>Job Description: <textarea id="contact_desc' + countpos + '" name="desc' + countpos + '" rows="8" cols="80"></textarea>\
             <span class="error">Field is required</span></div></p>  \
-            <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" value=""/>Company E-mail: <input type="text" id="contact_e-mail' + countpos + '" name="e-mail' + countpos + '" value=""/></p> \
-            <span class="error">Field is required</span></div> \
-            <p>Company Phone: <input type="text" id="contact_company_phone' + countpos + '" name="company_phone' + countpos + '" value=""/>Recruiter: <input type="text" id="contact_rec' + countpos + '" name="rec' + countpos + '" value=""/></p> \
-            <p>Recruiter E-mail: <input type="text" id="contact_rec-mail' + countpos + '" name="rec-mail' + countpos + '" value=""/>Recruiter Phone: <input type="text" id="contact_rec-phone' + countpos + '" name="rec-phone' + countpos + '" value=""/></p> \
-            <span class="error">Field is required</span> \
-            <p><input type="text" name="year'+ countpos + '" value=""/>Position<input type="text" name="year' + countpos + '" value=""/></p> \
+            <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" value=""/><span class="error">Field is required</span></p></div> \
+            <div><p>Company E-mail: <input type="text" id="contact_e-mail' + countpos + '" name="e-mail' + countpos + '" value=""/> \
+            <span class="error">Field is required</span></p></div> \
+            <div><p>Company Phone: <input type="text" id="contact_company_phone' + countpos + '" name="company_phone' + countpos + '" value=""/><span class="error">Field is required</span></p></div> \
+            <div><p>Recruiter: <input type="text" id="contact_rec' + countpos + '" name="rec' + countpos + '" value=""/><span class="error">Field is required</span></p></div> \
+            <div><p>Recruiter E-mail: <input type="text" id="contact_rec-mail' + countpos + '" name="rec-mail' + countpos + '" value=""/><span class="error">Field is required</span></p></div> \
+            Recruiter Phone: <input type="text" id="contact_rec-phone' + countpos + '" name="rec-phone' + countpos + '" value=""/> \
+            <span class="error">Field is required</span></p> \
             </div>');
         $("#contact_pos" + countpos).on('input', function () {
             var input = $(this);
@@ -89,10 +91,8 @@ $(document).ready(function () {
             if (!valid) {
                 error_element.removeClass("error").addClass('error_show');
                 error_free = false;
-                alert('not valid');
             } else {
                 error_element.removeClass("error_show").addClass("error");
-                alert("valid");
             }
 
 
