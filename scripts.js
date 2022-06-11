@@ -107,22 +107,3 @@ $(document).ready(function () {
 
 });
 
-
-/*
-alert("element is: " + element + "AND: " + input);
-var valid = element.hasClass("valid");
-var error_element = $("span", element.parent());
-if (!valid) {
-    error_element.removeClass("error").addClass(error_show);
-    error_free = false;
-} else {
-    alert("element is: " + element + "valid " + input);
-    error_element.removeClass("error_show").addClass("error");
-}
-}
-if (!error_free) {
-e.preventDefault();
-} else {
-alert('No errors 2: Form will be submitted');
-}
-*/

@@ -6,7 +6,6 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     if ((isset($_POST['submit']) && $_POST['submit'] === "jobs_submited")) {
         echo ("<h1>Success</h1>");
         
-
     }
     if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['email']) && !empty($_POST['email']))) {
 
