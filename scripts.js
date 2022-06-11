@@ -12,16 +12,16 @@ $(document).ready(function () {
         window.console && console.log("Adding Job offer:" + countpos);
         $('#position_fields').append(
             '<div id="job_offer' + countpos + '"> \
-            <p>Job Position: <input type="text" id="contact_pos' + countpos + '" name="pos' + countpos + '"/> \
-            <span class="error">Field is required</span> \
+            <div><p>Job Position: <input type="text" id="contact_pos' + countpos + '" name="pos' + countpos + '"/> \
+            <span class="error">Field is required</span></div> \
             <input type=""button" value="-" \
                 onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></p> \
-            <p>Job Description: <textarea id="contact_desc' + countpos +'" name="desc'+ countpos + '" rows="8" cols="80"></textarea></p> \
-            <span class="error">Field is required</span> \
-            <p>Company Name: <input type="text" id="contact_comp' + countpos +'" name="comp'+ countpos + '" value=""/>Company E-mail: <input type="text" id="contact_e-mail' + countpos + '" name="e-mail' + countpos + '" value=""/></p> \
-            <span class="error">Field is required</span> \
-            <p>Company Phone: <input type="text" id="contact_company_phone' + countpos + '" name="company_phone'+ countpos + '" value=""/>Recruiter: <input type="text" id="contact_rec' + countpos + '" name="rec' + countpos + '" value=""/></p> \
-            <p>Recruiter E-mail: <input type="text" id="contact_rec-mail' + countpos + '" name="rec-mail'+ countpos + '" value=""/>Recruiter Phone: <input type="text" id="contact_rec-phone' + countpos + '" name="rec-phone' + countpos + '" value=""/></p> \
+            <div><p>Job Description: <textarea id="contact_desc' + countpos + '" name="desc' + countpos + '" rows="8" cols="80"></textarea>\
+            <span class="error">Field is required</span></div></p>  \
+            <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" value=""/>Company E-mail: <input type="text" id="contact_e-mail' + countpos + '" name="e-mail' + countpos + '" value=""/></p> \
+            <span class="error">Field is required</span></div> \
+            <p>Company Phone: <input type="text" id="contact_company_phone' + countpos + '" name="company_phone' + countpos + '" value=""/>Recruiter: <input type="text" id="contact_rec' + countpos + '" name="rec' + countpos + '" value=""/></p> \
+            <p>Recruiter E-mail: <input type="text" id="contact_rec-mail' + countpos + '" name="rec-mail' + countpos + '" value=""/>Recruiter Phone: <input type="text" id="contact_rec-phone' + countpos + '" name="rec-phone' + countpos + '" value=""/></p> \
             <span class="error">Field is required</span> \
             <p><input type="text" name="year'+ countpos + '" value=""/>Position<input type="text" name="year' + countpos + '" value=""/></p> \
             </div>');
@@ -43,12 +43,12 @@ $(document).ready(function () {
             if (is_comp) { input.removeClass("invalid").addClass("valid"); }
             else { input.removeClass("valid").addClass("invalid"); }
         });
-        $("#contact_e-mail" + countpos).on('input', function() {
-            var input=$(this);
+        $("#contact_e-mail" + countpos).on('input', function () {
+            var input = $(this);
             var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            var is_email=re.test(input.val());
-            if(is_email){input.removeClass("invalid").addClass("valid");}
-            else{input.removeClass("valid").addClass("invalid");}
+            var is_email = re.test(input.val());
+            if (is_email) { input.removeClass("invalid").addClass("valid"); }
+            else { input.removeClass("valid").addClass("invalid"); }
         });
         $("#contact_company_phone" + countpos).on('input', function () {
             var input = $(this);
@@ -62,12 +62,12 @@ $(document).ready(function () {
             if (is_rec) { input.removeClass("invalid").addClass("valid"); }
             else { input.removeClass("valid").addClass("invalid"); }
         });
-        $("#contact_rec-mail" + countpos).on('input', function() {
-            var input=$(this);
+        $("#contact_rec-mail" + countpos).on('input', function () {
+            var input = $(this);
             var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            var is_rec_email=re.test(input.val());
-            if(is_rec_email){input.removeClass("invalid").addClass("valid");}
-            else{input.removeClass("valid").addClass("invalid");}
+            var is_rec_email = re.test(input.val());
+            if (is_rec_email) { input.removeClass("invalid").addClass("valid"); }
+            else { input.removeClass("valid").addClass("invalid"); }
         });
         $("#contact_rec-phone" + countpos).on('input', function () {
             var input = $(this);
@@ -79,27 +79,50 @@ $(document).ready(function () {
 
 
     });
-    $("#first_form_submit").click(function(e){
-        var form_data=$("#first_form").serializeArray();
-        var error_free=true;
+    $("#first_form_submit").click(function (e) {
+        var form_data = $("#first_form").serializeArray();
+        var error_free = true;
         for (var input in form_data) {
-            var element=$("#contact_"+form_data[input]['name']);
-            var valid=element.hasClass("valid");
-            var error_element=$("span", element.parent());
+            var element = $("#contact_" + form_data[input]['name']);
+            var valid = element.hasClass("valid");
+            var error_element = $("span", element.parent());
             if (!valid) {
-                error_element.removeClass("error").addClass(error_show);
-                error_free=false;
+                error_element.removeClass("error").addClass('error_show');
+                error_free = false;
+                alert('not valid');
             } else {
                 error_element.removeClass("error_show").addClass("error");
+                alert("valid");
             }
+
+
         }
         if (!error_free) {
             e.preventDefault();
-        } else {
-            alert('No errors: Form will be submitted');
-        }
-    });
+            } else {
+            alert('No errors 2: Form will be submitted');
+            }
+
+    }); 
 
 });
 
 
+/*
+alert("element is: " + element + "AND: " + input);
+var valid = element.hasClass("valid");
+var error_element = $("span", element.parent());
+if (!valid) {
+    error_element.removeClass("error").addClass(error_show);
+    error_free = false;
+} else {
+    alert("element is: " + element + "valid " + input);
+    error_element.removeClass("error_show").addClass("error");
+}
+}
+if (!error_free) {
+e.preventDefault();
+} else {
+alert('No errors 2: Form will be submitted');
+}
+*/

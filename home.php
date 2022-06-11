@@ -119,11 +119,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         $msg = $_SESSION['success'] = 'No offers yet';
                         unset($_SESSION['success']);
                         echo "<h1>$msg</h1>";
-                        echo('<form id="first_form" method="POST" action="health.php">');
+                        echo('<form id="first_form" method="POST" action="">');
                         echo('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
                         echo('<div id="position_fields"></div>');
                         echo '<h1>what</h1>';
-                        echo('<input type="submit" id="first_form_submit" name="submit" onclick="return doValidate();">Submit</button>');
+                        echo('<input type="submit" id="first_form_submit" name="submit">Submit</button>');
                         echo('</form>');
                         echo "<form method='POST' action='home.php'";
                         echo "<input type='hidden' id='quit' name='quit' value='true'>";

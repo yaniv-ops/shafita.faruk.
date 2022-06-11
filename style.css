@@ -63,7 +63,7 @@ p {
 }
 
 .error_show {
-    color: rgb(85, 0, 255);
+    color: rgb(255, 0, 34);
     margin-left: 10px;    
 }
 
@@ -73,6 +73,10 @@ input.invalid, textarea.invalid {
 
 input.valid, textarea.valid {
     border: 2px solid green;
+}
+
+.test {
+    background-color: cadetblue;
 }
 
 
