@@ -7,7 +7,7 @@ function updateUser($username, $email, $conn)
     $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
     $nRows = $conn->query("select count(*) from users")->fetchColumn();
     if ($nRows === "1") {
-        $_SESSION['error'] = "No Data at all";
+        $_SESSION['error'] = "No Users at all";
         return;
     }
     
@@ -53,12 +53,13 @@ function showUserdata($username, $conn) {
     $stmt->execute(array(":xyz" => $username ));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row === false ) {
-        $_SESSION['error'] = "Bad value for username";
+        unset($_SESSION['error']);
+        $_SESSION['success'] = "Empty Offers list";
         $_SESSION['username'] = $username;
+        unset($_SESSION['email']);
         header('Location: home.php');
         return;
     }
-    header('Locatin: home.php');
     return $row;
 }
 
