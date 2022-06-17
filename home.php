@@ -84,13 +84,19 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         <div class="contents-table">
             <?php
             if (isset($_SESSION['success'])) {
+                if (isset($_SESSION['success']) === "Adventurer has been added!") {
+                    unset($_SESSION['success']);
+                    $_SESSION['error'] = "Empty Offers list";
+                    header('Location: home.php');
+                    return;
+                }
                 if (isset($_POST['Quit'])) {
                     session_destroy();
                     header('Location: home.php');
                     return;
                 }
                 if ($_SESSION['success'] === "Empty Offers list") {
-                
+
                     $username = $_SESSION['username'];
                     $msg = $_SESSION['success'];
                     echo "<h1>$msg</h1>";
@@ -112,20 +118,36 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo "<h1>$row</h1>";
                     return;
                 }
-                if ($_SESSION['success'] === "enturer") {
-                    echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
-                    $row = showUserdata($_SESSION['username'], $conn);
-                    
-                    unset($_SESSION['success']);
+                if ($_SESSION['success'] == "Welcome New Adventurer") {
+                    $username = $_SESSION['username'];
+                    $email = $_SESSION['email'];
+                    echo '<p style="color:purple">' . $_SESSION['success'] . "</p>\n";
+                    echo '<p style="color:purple">' . $username . "</p>\n";
+                    echo '<p style="color:purple">' . $email . "</p>\n";
+                    echo '<h1>Would you Like to register as a new user?</h1>';
+                    echo "<form method='POST' action='home.php'>";
+                    echo '<input type="hidden" id="username"  name="username" value=' . $username . '>';
+                    echo '<input type="hidden" id="email" name="email" value=' . $email . '>';
+                    echo "<input type='hidden' id='new_user' name='new_user' value='true'>";
+                    echo "<input type='submit' name='submit'>";
+                    echo "</form>";
+                    echo "<form method='POST' action='home.php'";
+                    echo "<input type='hidden' id='quit' name='quit' value='true'>";
+                    echo "<input type='submit' name='Quit'>";
+                    echo "</form>";
                     return;
                 }
             } elseif (isset($_SESSION['error'])) {
+                if ($_SESSION['error'] === "Username is already taken") {
+                    unset($_SESSION['username']);
+                    session_destroy();
+                    header('Location: home.php');
+                    return;
+                }
 
                 if ($_SESSION['error'] == "Welcome New Adventurer") {
-
                     $username = $_SESSION['username'];
                     $email = $_SESSION['email'];
-                    session_destroy();
                     echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
                     echo '<p style="color:purple">' . $username . "</p>\n";
                     echo '<p style="color:purple">' . $email . "</p>\n";

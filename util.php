@@ -14,20 +14,25 @@ function updateUser($username, $email, $conn)
 
     foreach ($rows as $row) {
         if ($username === htmlentities($row['username']) && $email === htmlentities($row['email'])) {
+            unset($_SESSION['error']); 
             $_SESSION['success'] = "Welcome Adventurer";
             $_SESSION['username'] = $username;
             return;
         }
-        if ($username === htmlentities($row['username'])) {
-            $_SESSION['error'] = "Username is already taken";
+        if ($username === htmlentities($row['username'])) { 
+            unset($_SESSION['success']);
+            unset($_SESSION['username']);
+            unset($_SESSION['email']);
+            $_SESSION['error'] = "Username is already taken\nchoose another username";
             return;
         }
         if ($email === htmlentities($row['email'])) {
+            unset($_SESSION['email']);
             $_SESSION['error'] = "Email is being used";
             return;
         }
 
-        $_SESSION['error'] = "Welcome New Adventurer";
+        $_SESSION['success'] = "Welcome New Adventurer";
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
     }   return;     
@@ -41,10 +46,12 @@ function newUser($username, $email, $conn) {
     $stmt->execute(array(
         ':username' => $username,
         ':email' => $email));
+    unset($_SESSION['error']);    
     $_SESSION['success'] = "Adventurer has been added!";
+    $_SESSION['username'] = $username;
+    $_SESSION['email'] = $email;
     return;
-    
-    
+
 }
 
 
