@@ -84,10 +84,12 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         <div class="contents-table">
             <?php
             if (isset($_SESSION['success'])) {
-                if (isset($_SESSION['success']) === "Adventurer has been added!") {
-                    unset($_SESSION['success']);
-                    $_SESSION['error'] = "Empty Offers list";
-                    header('Location: home.php');
+                if ($_SESSION['success'] === "Adventurer has been added!") {
+                    session_destroy();
+                    echo "<form method='POST' action='home.php'";
+                    echo "<input type='hidden' id='quit' name='quit' value='true'>";
+                    echo "<input type='submit' name='Quit'>";
+                    echo "</form>";
                     return;
                 }
                 if (isset($_POST['Quit'])) {
@@ -121,6 +123,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 if ($_SESSION['success'] == "Welcome New Adventurer") {
                     $username = $_SESSION['username'];
                     $email = $_SESSION['email'];
+                    $msg = $_SESSION['success'];
+                    session_destroy();
                     echo '<p style="color:purple">' . $_SESSION['success'] . "</p>\n";
                     echo '<p style="color:purple">' . $username . "</p>\n";
                     echo '<p style="color:purple">' . $email . "</p>\n";
