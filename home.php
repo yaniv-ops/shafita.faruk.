@@ -84,6 +84,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         <div class="contents-table">
             <?php
             if (isset($_SESSION['success'])) {
+                if ((isset($_POST['pos1']))) {
+                    $_SESSION['success'] = "test is success!!!";
+                    header('Location: home.php');
+                    return;
+                }
                 if ($_SESSION['success'] === "Adventurer has been added!") {
                     session_destroy();
                     echo "<form method='POST' action='home.php'";
