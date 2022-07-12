@@ -6,8 +6,10 @@ function updateUser($username, $email, $conn)
     $sql = $conn->query("SELECT * FROM users");
     $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
     $nRows = $conn->query("select count(*) from users")->fetchColumn();
-    if ($nRows === "1") {
-        $_SESSION['error'] = "No Users at all";
+    if ($nRows === "1" OR $nRows === "0") {
+        $_SESSION['success'] = "Welcome New Adventurer";
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
         return;
     }
     
@@ -56,7 +58,7 @@ function newUser($username, $email, $conn) {
 
 
 function showUserdata($username, $conn) {
-    $stmt = $conn->prepare("SELECT * FROM job_offers where user= :xyz ");
+    $stmt = $conn->prepare("SELECT * FROM job_offers where user_id= :xyz ");
     $stmt->execute(array(":xyz" => $username ));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row === false ) {
