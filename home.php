@@ -3,11 +3,7 @@ require_once('pdo.php');
 require_once('util.php');
 session_start();
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
-    if ((isset($_POST['contact_pos1']))) {
-        $_SESSION['error'] = "test is success!!!";
-        header('Location: home.php');
-        return;
-    }
+
     if ((isset($_POST['submit']) && $_POST['submit'] === "jobs_submited")) {
         echo ("<h1>Success</h1>");
     }
@@ -85,7 +81,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             <?php
             if (isset($_SESSION['success'])) {
                 if ((isset($_POST['pos1']))) {
-                    $_SESSION['success'] = "test is success!!!";
+                    validatePos($conn);
+                    $_SESSION['success'] = $_SESSION['username'];
                     header('Location: home.php');
                     return;
                 }
