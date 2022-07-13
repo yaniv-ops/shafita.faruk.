@@ -21,7 +21,6 @@ try {
  echo "users table created successfully";
  $sql = "CREATE TABLE recruiters ( recruiter_id INT NOT NULL AUTO_INCREMENT,
   		recruiter_name VARCHAR(40) NOT NULL,
-		recruiter_company VARCHAR(40),
 		recruiter_email VARCHAR(60),
 		recruiter_phone VARCHAR(20),
 		PRIMARY KEY (recruiter_id))
