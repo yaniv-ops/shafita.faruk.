@@ -92,7 +92,7 @@ function validatePos($conn) {
     $stmt = $conn->prepare('SELECT user_id FROM users                                         sers
     WHERE username = :user');
     $stmt->execute(array(':user' => $_SESSION['username']));
-    $profile = $stmt->fetchColumn(PDO::FETCH_ASSOC);
+    $profile = $stmt->fetchColumn();
     if ( $profile === false) {
         $_SESSION['error'] = 'Could not load profile';
         header('Location: home.php');
@@ -147,7 +147,7 @@ function validatePos($conn) {
         $stmt = $conn->prepare('SELECT recruiter_id FROM recruiters                                         sers
         WHERE recruiter_name = :rec_name');
         $stmt->execute(array(':rec_name' => $recruiter));
-        $rec_profile = $stmt->fetch(PDO::FETCH_ASSOC);
+        $rec_profile = $stmt->fetchColumn();
         if ( $rec_profile === false) {
             $_SESSION['error'] = 'Could not load recruiter profile';
             header('Location: home.php');
@@ -165,7 +165,7 @@ function validatePos($conn) {
         $stmt = $conn->prepare('SELECT job_id FROM jobs                                         sers
         WHERE job_description = :job_name');
         $stmt->execute(array(':job_name' => $description));
-        $job_profile = $stmt->fetch(PDO::FETCH_ASSOC);
+        $job_profile = $stmt->fetchColumn();
         if ( $job_profile === false) {
             $_SESSION['error'] = 'Could not load job profile';
             header('Location: home.php');
@@ -173,8 +173,8 @@ function validatePos($conn) {
         };
 
         $stmt = $conn->prepare('INSERT INTO job_offers
-            (user_id, job_id, current, follow, date_now, follow_date, 
-            last_check, rec_id)
+            (user_id, job_id, current_status, follow_status, date_recieved, follow_date, 
+            last_checked_date, recruiter_id)
             VALUES ( :user_id, :job_id, :current, :follow, :date_now, :follow_date, 
             :last_check, :rec_id)');
         $stmt->execute(array(
