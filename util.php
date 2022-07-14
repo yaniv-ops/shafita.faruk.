@@ -92,7 +92,7 @@ function validatePos($conn) {
     $stmt = $conn->prepare('SELECT user_id FROM users                                         sers
     WHERE username = :user');
     $stmt->execute(array(':user' => $_SESSION['username']));
-    $profile = $stmt->fetch(PDO::FETCH_ASSOC);
+    $profile = $stmt->fetchColumn(PDO::FETCH_ASSOC);
     if ( $profile === false) {
         $_SESSION['error'] = 'Could not load profile';
         header('Location: home.php');
@@ -128,8 +128,8 @@ function validatePos($conn) {
             ':comp_phone' => $company_phone)
         );
         $stmt = $conn->prepare('INSERT INTO recruiters
-            (recruiter_name, recruiter_mail, recruiter_phone)
-            VALUES ( :rec_name, :rec_mail, ;rec_phone)');
+            (recruiter_name, recruiter_email, recruiter_phone)
+            VALUES ( :rec_name, :rec_mail, :rec_phone)');
         $stmt->execute(array(
             ':rec_name' => $recruiter,
             ':rec_mail' => $recruiter_mail,
@@ -138,7 +138,7 @@ function validatePos($conn) {
         $stmt = $conn->prepare('SELECT company_id FROM companies                                         sers
         WHERE company_name = :comp_name');
         $stmt->execute(array(':comp_name' => $company));
-        $comp_profile = $stmt->fetch(PDO::FETCH_ASSOC);
+        $comp_profile = $stmt->fetchColumn();
         if ( $comp_profile === false) {
             $_SESSION['error'] = 'Could not load company profile';
             header('Location: home.php');
@@ -156,7 +156,7 @@ function validatePos($conn) {
         
         $stmt = $conn->prepare('INSERT INTO jobs
             (job_name, job_description, company_id)
-            VALUES ( :job, :job_des, : comp_id)');
+            VALUES ( :job, :job_des, :comp_id)');
         $stmt->execute(array(
             ':job' => $position,
             ':job_des' => $description,
