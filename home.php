@@ -4,9 +4,6 @@ require_once('util.php');
 session_start();
 if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 
-    if ((isset($_POST['submit']) && $_POST['submit'] === "jobs_submited")) {
-        echo ("<h1>Success</h1>");
-    }
     if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['email']) && !empty($_POST['email']))) {
 
         if (isset($_POST['new_user']) && $_POST['new_user'] === "true") {
@@ -14,12 +11,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             header('Location: home.php');
             return;
         } else {
-            updateUser($_POST['username'], $_POST['email'], $conn);
+            checkUser($_POST['username'], $_POST['email'], $conn);
             header('Location: home.php');
             return;
+            
         }
-        header('Location: home.php');
-        return;
     }
     if (isset($_POST['username']) && !empty($_POST['username'])) {
 
@@ -35,11 +31,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         header('Location: home.php');
         return;
     }
-    if (isset($_POST['username']) && empty($_POST['username']) && isset($_POST['email']) && empty($_POST['email'])) {
-        $_SESSION['error'] = "You must provide an email and a username";
+    if (isset($_POST['email']) && isset($_POST['username']))
+       { $_SESSION['error'] = "You must";
         header('Location: home.php');
         return;
-    }
+       }
 }
 
 ?>
@@ -63,10 +59,21 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 <body>
     <?php
     if (isset($_SESSION['error'])) {
-        echo '<p style="color:red">' . $_SESSION['error'] . '</p>\n';
+        echo '<p style="color:red">' . $_SESSION['error'] . "</p>\n";
     }
     if (isset($_SESSION['success'])) {
         echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+        if (isset($_POST['Quit'])) {
+            session_destroy();
+            header('Location: home.php');
+            return;
+        }
+        if ((isset($_POST['pos1']))) {
+            validatePos($conn);
+            $_SESSION['success'] = $_SESSION['username'];
+            header('Location: home.php');
+            return;
+        }
     }
     if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
         echo '<p style="color:white">' . $_SESSION['username'] . "</p>\n";
@@ -79,50 +86,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         <img class="scroll" src="https://www.runescape.com/img/rsp777/scroll/backdrop_765_bottom.gif">
         <div class="contents-table">
             <?php
-            if (isset($_SESSION['success'])) {
-                if ((isset($_POST['pos1']))) {
-                    validatePos($conn);
-                    $_SESSION['success'] = $_SESSION['username'];
-                    header('Location: home.php');
-                    return;
-                }
-                if ($_SESSION['success'] === "Adventurer has been added!") {
-                    session_destroy();
-                    echo "<form method='POST' action='home.php'";
-                    echo "<input type='hidden' id='quit' name='quit' value='true'>";
-                    echo "<input type='submit' name='Quit'>";
-                    echo "</form>";
-                    return;
-                }
-                if (isset($_POST['Quit'])) {
-                    session_destroy();
-                    header('Location: home.php');
-                    return;
-                }
-                if ($_SESSION['success'] === "Empty Offers list") {
 
-                    $username = $_SESSION['username'];
-                    $msg = $_SESSION['success'];
-                    echo "<h1>$msg</h1>";
-                    echo ('<form id="first_form" method="POST" action="home.php">');
-                    echo ('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
-                    echo ('<div id="position_fields"></div>');
-                    echo '<h1>what</h1>';
-                    echo ('<input type="submit" id="first_form_submit" name="submit">Submit</button>');
-                    echo ('</form>');
-                    echo "<form method='POST' action='home.php'";
-                    echo "<input type='hidden' id='quit' name='quit' value='true'>";
-                    echo "<input type='submit' name='Quit'>";
-                    echo "</form>";
-                    return;
-                }
-                if ($_SESSION['success'] === "Welcome Adventurer") {
-                    echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
-                    $row = showUserdata($_SESSION['username'], $conn);
-                    echo "<h1>$row</h1>";
-                    return;
-                }
+            if (isset($_SESSION['success'])) {
+                echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
                 if ($_SESSION['success'] == "Welcome New Adventurer") {
+                    echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
                     $username = $_SESSION['username'];
                     $email = $_SESSION['email'];
                     $msg = $_SESSION['success'];
@@ -141,40 +109,43 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo "<input type='hidden' id='quit' name='quit' value='true'>";
                     echo "<input type='submit' name='Quit'>";
                     echo "</form>";
-                    return;
+                    
                 }
-            } elseif (isset($_SESSION['error'])) {
-                if ($_SESSION['error'] === "Username is already taken") {
-                    unset($_SESSION['username']);
+                if ($_SESSION['success'] == "Adventurer has been added!") {
                     session_destroy();
-                    header('Location: home.php');
-                    return;
-                }
-
-                if ($_SESSION['error'] == "Welcome New Adventurer") {
-                    $username = $_SESSION['username'];
-                    $email = $_SESSION['email'];
-                    echo '<p style="color:purple">' . $_SESSION['error'] . "</p>\n";
-                    echo '<p style="color:purple">' . $username . "</p>\n";
-                    echo '<p style="color:purple">' . $email . "</p>\n";
-                    echo '<h1>Would you Like to register as a new user?</h1>';
-                    echo "<form method='POST' action='home.php'>";
-                    echo '<input type="hidden" id="username"  name="username" value=' . $username . '>';
-                    echo '<input type="hidden" id="email" name="email" value=' . $email . '>';
-                    echo "<input type='hidden' id='new_user' name='new_user' value='true'>";
-                    echo "<input type='submit' name='submit'>";
-                    echo "</form>";
                     echo "<form method='POST' action='home.php'";
                     echo "<input type='hidden' id='quit' name='quit' value='true'>";
                     echo "<input type='submit' name='Quit'>";
                     echo "</form>";
-                    return;
-                } elseif ($_SESSION['error'] == "Empty Offers list") {
-                    unset($_SESSION['error']);
+                    
+                }
+                if ($_SESSION['success'] === "Welcome Adventurer") {
+                    echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+                    $row = showUserdata($_SESSION['username'], $conn);
+                    if ($row === false ) {
+                        $username = $_SESSION['username'];
+                        $msg = $_SESSION['success'];
+                        echo "<h1>No job offers</h1>";
+                        echo ('<form id="first_form" method="POST" action="home.php">');
+                        echo ('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
+                        echo ('<div id="position_fields"></div>');
+                        echo '<h1>what</h1>';
+                        echo ('<input type="submit" id="first_form_submit" name="submit">Submit</button>');
+                        echo ('</form>');
+                        echo "<form method='POST' action='home.php'";
+                        echo "<input type='hidden' id='cancel' name='cancel' value='true'>";
+                        echo "<input type='submit' name='Cancel'>";
+                        echo "</form>";
+                        echo "<form method='POST' action='home.php'";
+                        echo "<input type='hidden' id='quit' name='quit' value='true'>";
+                        echo "<input type='submit' name='Quit'>";
+                        echo "</form>";
+                        
+                    } else {
+                    echo "<h1>$row</h1>";
                     $username = $_SESSION['username'];
-                    $msg = $_SESSION['success'] = 'No offers yet';
-                    unset($_SESSION['success']);
-                    echo "<h1>$msg</h1>";
+                    $msg = $_SESSION['success'];
+                    echo "<h1>Job offers</h1>";
                     echo ('<form id="first_form" method="POST" action="home.php">');
                     echo ('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
                     echo ('<div id="position_fields"></div>');
@@ -185,16 +156,17 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo "<input type='hidden' id='quit' name='quit' value='true'>";
                     echo "<input type='submit' name='Quit'>";
                     echo "</form>";
-                    return;
-                } else {
-
-                    unset($_SESSION['error']);
-                    require_once('login.php');
-                    return;
+                    }
                 }
+                
+            } else if (isset($_SESSION['error'])) {
+            session_destroy();
+            echo var_dump($_SESSION);            
+            include('login.php');
+            } else {
+                echo var_dump($_SESSION);
+                include('login.php');
             }
-            require_once('login.php');
-            return;
 
 
             ?>
