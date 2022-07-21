@@ -70,7 +70,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         }
         if ((isset($_POST['pos1']))) {
             validatePos($conn);
-            $_SESSION['success'] = $_SESSION['username'];
+            $_SESSION['success'] = "Welcome Adventurer";
             header('Location: home.php');
             return;
         }
@@ -142,7 +142,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         echo "</form>";
                         
                     } else {
-                    echo "<h1>$row</h1>";
+
+                    foreach ($row as $value) {
+                        echo "<h1>".$value['job_offer_id']."</h1>";
+                    }
+                    echo "<h1>Success</h1>";
                     $username = $_SESSION['username'];
                     $msg = $_SESSION['success'];
                     echo "<h1>Job offers</h1>";

@@ -63,8 +63,8 @@ function newUser($username, $email, $conn) {
 
 function showUserdata($username, $conn) {
     $stmt = $conn->prepare("SELECT * FROM job_offers where user_id= :xyz ");
-    $stmt->execute(array(":xyz" => $username ));
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->execute(array(":xyz" => "1" ));
+    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $row;
 }
 
