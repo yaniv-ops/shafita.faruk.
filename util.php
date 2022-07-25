@@ -62,10 +62,41 @@ function newUser($username, $email, $conn) {
 
 
 function showUserdata($username, $conn) {
+
+    $stmt = $conn->prepare("SELECT user_id FROM users where username = :username");
+    $stmt->execute(array(":username" => $username));
+    $user_id = $stmt->fetchColumn();
     $stmt = $conn->prepare("SELECT * FROM job_offers where user_id= :xyz ");
-    $stmt->execute(array(":xyz" => "1" ));
+    $stmt->execute(array(":xyz" => $user_id ));
     $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $row;
+
+
+}
+
+function prepareData($value, $conn) {
+   
+        $job = $value;
+        $stmt = $conn->prepare('SELECT * FROM jobs WHERE job_id = :job');
+        $stmt->execute(array(":job" => $job));
+        $row_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row_jobs;
+    }
+
+function pullComp($comp_id, $conn) {
+    $company = $comp_id;
+    $stmt = $conn->prepare('SELECT * FROM companies WHERE company_id = :comp_id');
+    $stmt->execute(array(":comp_id" => $company));
+    $row_comp = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row_comp;
+}
+
+function pullRec ($rec_id, $conn) {
+    $recruiter = $rec_id;
+    $stmt = $conn->prepare('SELECT * FROM recruiters WHERE recruiter_id = :comp_id');
+    $stmt->execute(array(":comp_id" => $recruiter));
+    $row_rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row_rec;
 }
 
 function insertData($username, $conn) {

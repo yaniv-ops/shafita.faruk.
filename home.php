@@ -122,7 +122,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 if ($_SESSION['success'] === "Welcome Adventurer") {
                     echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
                     $row = showUserdata($_SESSION['username'], $conn);
-                    if ($row === false ) {
+                    if (count($row) == 0 ) {
                         $username = $_SESSION['username'];
                         $msg = $_SESSION['success'];
                         echo "<h1>No job offers</h1>";
@@ -143,13 +143,39 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         
                     } else {
 
-                    foreach ($row as $value) {
-                        echo "<h1>".$value['job_offer_id']."</h1>";
-                    }
+                        
+                        
                     echo "<h1>Success</h1>";
                     $username = $_SESSION['username'];
                     $msg = $_SESSION['success'];
                     echo "<h1>Job offers</h1>";
+                    
+                    
+                    foreach ($row as $value) {
+                        echo "<table>";
+                        $job_id = prepareData($value['job_id'], $conn);
+                        $recruiter = pullRec($value['recruiter_id'], $conn);
+                        foreach ($job_id as $jid) {
+                            $company = pullComp($jid['company_id'], $conn);                           
+                            echo "<form><tr>
+                            <td><p>".$jid['job_name']."</p></td>
+                            <td><p>".$jid['job_description']."</p></td>
+                            <td><p>".$company['company_name']."</p></td>
+                            <td><p>".$company['company_email']."</p></td>
+                            <td><p>".$company['company_phone']."</p></td>
+                            <td><p>".$recruiter['recruiter_name']."</p></td>
+                            <td><p>".$recruiter['recruiter_email']."</p></td>
+                            <td><p>".$recruiter['recruiter_phone']."</p></td>
+                            <td><button>Update</button></td>
+                            <td><button>Send recruiter an update</button></td>
+                            <td><p>Updated</p></td>
+                            <td><p>Update sent</p></td>
+                            </tr>";
+                        }
+                        echo "</form></table>
+                        "; 
+                    } 
+  
                     echo ('<form id="first_form" method="POST" action="home.php">');
                     echo ('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
                     echo ('<div id="position_fields"></div>');
