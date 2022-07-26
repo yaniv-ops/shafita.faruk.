@@ -54,7 +54,8 @@ $(document).ready(function () {
         });
         $("#contact_company_phone" + countpos).on('input', function () {
             var input = $(this);
-            var is_phone = input.val();
+            var re = /^[0-9-]*$/;
+            var is_phone = re.test(input.val());
             if (is_phone) { input.removeClass("invalid").addClass("valid"); }
             else { input.removeClass("valid").addClass("invalid"); }
         });
@@ -73,7 +74,9 @@ $(document).ready(function () {
         });
         $("#contact_rec-phone" + countpos).on('input', function () {
             var input = $(this);
-            var is_rec_phone = input.val();
+            var input = $(this);
+            var re = /^[0-9-]*$/;
+            var is_rec_phone = re.test(input.val());
             if (is_rec_phone) { input.removeClass("invalid").addClass("valid"); }
             else { input.removeClass("valid").addClass("invalid"); }
         });
