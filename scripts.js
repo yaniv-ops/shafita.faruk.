@@ -18,7 +18,8 @@ $(document).ready(function () {
                 onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></p> \
             <div><p>Job Description: <textarea id="contact_desc' + countpos + '" name="desc' + countpos + '" rows="8" cols="80"></textarea>\
             <span class="error">Field is required</span></div></p>  \
-            <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" value=""/><span class="error">Field is required</span></p>\
+            <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" class=company_name value=""/>\
+            <span class="error">Field is required</span></p>\
             <p>Company E-mail: <input type="text" id="contact_e-mail' + countpos + '" name="e-mail' + countpos + '" value=""/> \
             <span class="error">Field is required</span></div></p> \
             <p>Company Phone: <input type="text" id="contact_company_phone' + countpos + '" name="company_phone' + countpos + '" value=""/><span class="error">Field is required</span></p>\
@@ -79,11 +80,14 @@ $(document).ready(function () {
             var is_rec_phone = re.test(input.val());
             if (is_rec_phone) { input.removeClass("invalid").addClass("valid"); }
             else { input.removeClass("valid").addClass("invalid"); }
-        });
-
-
+        }); 
+        $('.company_name').autocomplete({
+            source: 'json.php'
+                });
 
     });
+
+
     $("#first_form_submit").click(function (e) {
         var form_data = $("#first_form").serializeArray();
         var error_free = true;
@@ -106,7 +110,7 @@ $(document).ready(function () {
             alert('not valid');
             e.preventDefault();
         } else {
-            alert('No errors 2: Form will be submitted');
+            alert('No errors: Form will be submitted');
         }
 
     });

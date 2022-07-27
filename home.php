@@ -51,6 +51,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="scripts.js"></script>
@@ -166,6 +168,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             <td><p>".$recruiter['recruiter_name']."</p></td>
                             <td><p>".$recruiter['recruiter_email']."</p></td>
                             <td><p>".$recruiter['recruiter_phone']."</p></td>
+                            <td><p>".$jid['job_name']."</p></td>
                             <td><button>Update</button></td>
                             <td><button>Send recruiter an update</button></td>
                             <td><p>Updated</p></td>
