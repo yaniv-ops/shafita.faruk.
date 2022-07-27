@@ -151,8 +151,6 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     $username = $_SESSION['username'];
                     $msg = $_SESSION['success'];
                     echo "<h1>Job offers</h1>";
-                    
-                    
                     foreach ($row as $value) {
                         echo "<table>";
                         $job_id = prepareData($value['job_id'], $conn);
@@ -163,12 +161,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             <td><p>".$jid['job_name']."</p></td>
                             <td><p>".$jid['job_description']."</p></td>
                             <td><p>".$company['company_name']."</p></td>
-                            <td><p>".$company['company_email']."</p></td>
-                            <td><p>".$company['company_phone']."</p></td>
                             <td><p>".$recruiter['recruiter_name']."</p></td>
                             <td><p>".$recruiter['recruiter_email']."</p></td>
                             <td><p>".$recruiter['recruiter_phone']."</p></td>
-                            <td><p>".$jid['job_name']."</p></td>
                             <td><button>Update</button></td>
                             <td><button>Send recruiter an update</button></td>
                             <td><p>Updated</p></td>

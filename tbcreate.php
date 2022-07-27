@@ -30,8 +30,6 @@ try {
  
  $sql = "CREATE TABLE companies ( company_id INT NOT NULL AUTO_INCREMENT,
   company_name VARCHAR(60),
-  company_email VARCHAR(60),
-  company_phone VARCHAR(20),
   PRIMARY KEY (company_id))
   ENGINE=INNODB;";
  $conn->exec($sql);

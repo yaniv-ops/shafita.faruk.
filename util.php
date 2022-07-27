@@ -114,10 +114,19 @@ function insertData($username, $conn) {
     return $row;
 }
 
+
+function checkIfcomp ($conn, $company) {
+    $stmt = $conn->prepare('SELECT * FROM companies 
+    where company_name= :comp_name');
+    $stmt->execute(array(":comp_name"=> $company));
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row;
+}
+
 // this function for inserting data for later on friday at most
 
 function validatePos($conn) {
-    $stmt = $conn->prepare('SELECT user_id FROM users                                         sers
+    $stmt = $conn->prepare('SELECT user_id FROM users                                         
     WHERE username = :user');
     $stmt->execute(array(':user' => $_SESSION['username']));
     $profile = $stmt->fetchColumn();
@@ -137,8 +146,6 @@ function validatePos($conn) {
         $position = $_POST['pos'.$i];
         $description = $_POST['desc'.$i];
         $company = $_POST['comp'.$i];
-        $company_mail = $_POST['e-mail'.$i];
-        $company_phone = $_POST['company_phone'.$i];
         $recruiter = $_POST['rec'.$i];
         $recruiter_mail = $_POST['rec-mail'.$i];
         $recruiter_phone = $_POST['rec-phone'.$i];
@@ -146,15 +153,15 @@ function validatePos($conn) {
         $follow_status = $pointer_to_followstatus;
         $date_now = $pointer_to_date;
         $follow_date = $pointer_to_date;
-
+        $check_comp = checkIfcomp($conn, $company);
+        if ($check_comp === false) {
         $stmt = $conn->prepare('INSERT INTO companies 
-            (company_name, company_email, company_phone)
-            VALUES ( :comp_name, :comp_mail, :comp_phone)');
+            (company_name)
+            VALUES ( :comp_name)');
         $stmt->execute(array(
-            ':comp_name' => $company,
-            ':comp_mail' => $company_mail,
-            ':comp_phone' => $company_phone)
+            ':comp_name' => $company)
         );
+    }
         $stmt = $conn->prepare('INSERT INTO recruiters
             (recruiter_name, recruiter_email, recruiter_phone)
             VALUES ( :rec_name, :rec_mail, :rec_phone)');

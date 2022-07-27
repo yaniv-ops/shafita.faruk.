@@ -20,9 +20,6 @@ $(document).ready(function () {
             <span class="error">Field is required</span></div></p>  \
             <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" class=company_name value=""/>\
             <span class="error">Field is required</span></p>\
-            <p>Company E-mail: <input type="text" id="contact_e-mail' + countpos + '" name="e-mail' + countpos + '" value=""/> \
-            <span class="error">Field is required</span></div></p> \
-            <p>Company Phone: <input type="text" id="contact_company_phone' + countpos + '" name="company_phone' + countpos + '" value=""/><span class="error">Field is required</span></p>\
             <p>Recruiter: <input type="text" id="contact_rec' + countpos + '" name="rec' + countpos + '" value=""/><span class="error">Field is required</span></p> \
             <p>Recruiter E-mail: <input type="text" id="contact_rec-mail' + countpos + '" name="rec-mail' + countpos + '" value=""/><span class="error">Field is required</span></p>\
             <p>Recruiter Phone: <input type="text" id="contact_rec-phone' + countpos + '" name="rec-phone' + countpos + '" value=""/><span class="error">Field is required</span></p> \
@@ -46,20 +43,7 @@ $(document).ready(function () {
             if (is_comp) { input.removeClass("invalid").addClass("valid"); }
             else { input.removeClass("valid").addClass("invalid"); }
         });
-        $("#contact_e-mail" + countpos).on('input', function () {
-            var input = $(this);
-            var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            var is_email = re.test(input.val());
-            if (is_email) { input.removeClass("invalid").addClass("valid"); }
-            else { input.removeClass("valid").addClass("invalid"); }
-        });
-        $("#contact_company_phone" + countpos).on('input', function () {
-            var input = $(this);
-            var re = /^[0-9-]*$/;
-            var is_phone = re.test(input.val());
-            if (is_phone) { input.removeClass("invalid").addClass("valid"); }
-            else { input.removeClass("valid").addClass("invalid"); }
-        });
+
         $("#contact_rec" + countpos).on('input', function () {
             var input = $(this);
             var is_rec = input.val();
