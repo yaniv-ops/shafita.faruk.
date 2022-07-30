@@ -82,7 +82,10 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 
     <h1>Slo-Rocking Horses</h1>
     <div id='dialog-form' title='My jkhgjhkgjh dialog box'>
-        <div id=body><textarea name="testArea" id="myarea" required rows="10"></textarea><br></div>
+        <div id='body'><textarea name="testArea" id="myarea" required rows="10"></textarea><br></div>
+    </div>
+    <div id='dialog-form2' title='My title2 dialog box'>
+        <div id='body2'><textarea name="testArea2" id="myarea2" required rows="10"></textarea><br></div>
     </div>
     <h1 id="scribble-top">A Job Helper</h1>
     <div class="wrapped-content">
@@ -169,7 +172,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             <td><p>".$recruiter['recruiter_phone']."</p></td>
                             <td><p>".$value['follow_status']."</p></td>
                             <td><p>".$value['follow_date']."</p></td>
-                            <td><button>Update</button></td>
+                            <td><button id='update'>Update</button></td>
                             <td><button class='send_button'>Send recruiter an update</button></td>
                             </tr></form>";
                             

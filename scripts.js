@@ -16,7 +16,23 @@ $(document).ready(function () {
     },
     close: function() {
         alert("closing");
-    }})
+    }});
+    var dialog2
+    dialog2 = $("#dialog-form2").dialog({
+        autoOpen: false,
+        resizable: true,
+        height: 400,
+        width: 350,
+        modal: true,
+        buttons: {
+            "update" : send_mail2,
+            Cancel: function () {
+            dialog2.dialog("close");
+        }
+    },
+    close: function() {
+        alert("closing");
+    }});
 
     window.console && console.log('Document ready called');
     $('#addJob').click(function (event) {
@@ -120,12 +136,21 @@ $(document).ready(function () {
         dialog.dialog("close");
         
     }
+    function send_mail2 (e) {
+        alert("Soon available");
+        dialog2.dialog("close");
+        
+    }
 
     $(".send_button").click(function (e) {
         e.preventDefault();
         dialog.dialog("open");
         
 
+    });
+    $("#update").click(function (event) {
+        event.preventDefault();
+        dialog2.dialog("open");
     });
 
 });
