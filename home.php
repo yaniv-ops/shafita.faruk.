@@ -32,7 +32,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         return;
     }
     if (isset($_POST['email']) && isset($_POST['username']))
-       { $_SESSION['error'] = "You must";
+       { $_SESSION['error'] = "You must provide a username and e-mail";
         header('Location: home.php');
         return;
        }
@@ -64,7 +64,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
         echo '<p style="color:red">' . $_SESSION['error'] . "</p>\n";
     }
     if (isset($_SESSION['success'])) {
-        echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+
         if (isset($_POST['Quit'])) {
             session_destroy();
             header('Location: home.php');
@@ -77,12 +77,13 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             return;
         }
     }
-    if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
-        echo '<p style="color:white">' . $_SESSION['username'] . "</p>\n";
-    }
+
     ?>
 
     <h1>Slo-Rocking Horses</h1>
+    <div id='dialog-form' title='My jkhgjhkgjh dialog box'>
+        <div id=body><textarea name="testArea" id="myarea" required rows="10"></textarea><br></div>
+    </div>
     <h1 id="scribble-top">A Job Helper</h1>
     <div class="wrapped-content">
         <img class="scroll" src="https://www.runescape.com/img/rsp777/scroll/backdrop_765_bottom.gif">
@@ -91,15 +92,15 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 
             if (isset($_SESSION['success'])) {
                 echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+                if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
+                    echo '<p style="color:white">' . $_SESSION['username'] . "</p>\n";
+                }
                 if ($_SESSION['success'] == "Welcome New Adventurer") {
-                    echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+                    
                     $username = $_SESSION['username'];
                     $email = $_SESSION['email'];
                     $msg = $_SESSION['success'];
                     session_destroy();
-                    echo '<p style="color:purple">' . $_SESSION['success'] . "</p>\n";
-                    echo '<p style="color:purple">' . $username . "</p>\n";
-                    echo '<p style="color:purple">' . $email . "</p>\n";
                     echo '<h1>Would you Like to register as a new user?</h1>';
                     echo "<form method='POST' action='home.php'>";
                     echo '<input type="hidden" id="username"  name="username" value=' . $username . '>';
@@ -115,6 +116,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 }
                 if ($_SESSION['success'] == "Adventurer has been added!") {
                     session_destroy();
+                    echo "<h3>Re-enter with the username and e-mail you have registered</h3>";
                     echo "<form method='POST' action='home.php'";
                     echo "<input type='hidden' id='quit' name='quit' value='true'>";
                     echo "<input type='submit' name='Quit'>";
@@ -122,7 +124,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     
                 }
                 if ($_SESSION['success'] === "Welcome Adventurer") {
-                    echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
+                    
                     $row = showUserdata($_SESSION['username'], $conn);
                     if (count($row) == 0 ) {
                         $username = $_SESSION['username'];
@@ -145,17 +147,18 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         
                     } else {
 
-                        
-                        
-                    echo "<h1>Success</h1>";
                     $username = $_SESSION['username'];
                     $msg = $_SESSION['success'];
                     echo "<h1>Job offers</h1>";
+                    echo "<table><th>Job name</th>
+                    <th>Job Description</th><th>Company</th><th>Recruiter</th><th>Recruiter mail</th>
+                    <th>Recruiter phone</th><th>Follow-up</th><th>Follow-up date</th>";    
                     foreach ($row as $value) {
-                        echo "<table>";
+                        
                         $job_id = prepareData($value['job_id'], $conn);
                         $recruiter = pullRec($value['recruiter_id'], $conn);
                         foreach ($job_id as $jid) {
+                        
                             $company = pullComp($jid['company_id'], $conn);                           
                             echo "<form><tr>
                             <td><p>".$jid['job_name']."</p></td>
@@ -164,20 +167,20 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             <td><p>".$recruiter['recruiter_name']."</p></td>
                             <td><p>".$recruiter['recruiter_email']."</p></td>
                             <td><p>".$recruiter['recruiter_phone']."</p></td>
+                            <td><p>".$value['follow_status']."</p></td>
+                            <td><p>".$value['follow_date']."</p></td>
                             <td><button>Update</button></td>
-                            <td><button>Send recruiter an update</button></td>
-                            <td><p>Updated</p></td>
-                            <td><p>Update sent</p></td>
-                            </tr>";
+                            <td><button class='send_button'>Send recruiter an update</button></td>
+                            </tr></form>";
+                            
                         }
-                        echo "</form></table>
-                        "; 
+                        
+                         
                     } 
-  
+                    echo "</table>";
                     echo ('<form id="first_form" method="POST" action="home.php">');
                     echo ('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
                     echo ('<div id="position_fields"></div>');
-                    echo '<h1>what</h1>';
                     echo ('<input type="submit" id="first_form_submit" name="submit">Submit</button>');
                     echo ('</form>');
                     echo "<form method='POST' action='home.php'";
@@ -188,11 +191,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 }
                 
             } else if (isset($_SESSION['error'])) {
-            session_destroy();
-            echo var_dump($_SESSION);            
+            session_destroy();            
             include('login.php');
             } else {
-                echo var_dump($_SESSION);
                 include('login.php');
             }
 

@@ -80,11 +80,23 @@ input.valid, textarea.valid {
 .test {
     background-color: cadetblue;
 }
+table {
+    width: 100%;
+    text-align: left;
 
 
+  }
+th, td {
+    border: 1px solid;
+    height: 5px;
+  
+  }
+table td p {
+    height: 5px;
+}
 /* small devices (phones, 900px and down) */
 @media only screen and (max-width: 900px) {
     .wrapped-content {
-        width: 100%;
+        width: 80%;
     }
     } 

@@ -1,6 +1,23 @@
 
 countpos = 0;
 $(document).ready(function () {
+    var dialog
+    dialog = $("#dialog-form").dialog({
+        autoOpen: false,
+        resizable: true,
+        height: 400,
+        width: 350,
+        modal: true,
+        buttons: {
+            "Send email" : send_mail,
+            Cancel: function () {
+            dialog.dialog("close");
+        }
+    },
+    close: function() {
+        alert("closing");
+    }})
+
     window.console && console.log('Document ready called');
     $('#addJob').click(function (event) {
         event.preventDefault();
@@ -96,6 +113,18 @@ $(document).ready(function () {
         } else {
             alert('No errors: Form will be submitted');
         }
+
+    });
+    function send_mail (e) {
+        alert("Soon available");
+        dialog.dialog("close");
+        
+    }
+
+    $(".send_button").click(function (e) {
+        e.preventDefault();
+        dialog.dialog("open");
+        
 
     });
 
