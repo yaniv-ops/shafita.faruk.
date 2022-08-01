@@ -84,9 +84,6 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     <div id='dialog-form' title='My jkhgjhkgjh dialog box'>
         <div id='body'><textarea name="testArea" id="myarea" required rows="10"></textarea><br></div>
     </div>
-    <div id='dialog-form2' title='My title2 dialog box'>
-        <div id='body2'><textarea name="testArea2" id="myarea2" required rows="10"></textarea><br></div>
-    </div>
     <h1 id="scribble-top">A Job Helper</h1>
     <div class="wrapped-content">
         <img class="scroll" src="https://www.runescape.com/img/rsp777/scroll/backdrop_765_bottom.gif">
@@ -170,15 +167,22 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             <td><p>".$recruiter['recruiter_name']."</p></td>
                             <td><p>".$recruiter['recruiter_email']."</p></td>
                             <td><p>".$recruiter['recruiter_phone']."</p></td>
-                            <td><p>".$value['follow_status']."</p></td>
-                            <td><p>".$value['follow_date']."</p></td>
+                            <td><select id='cars' name='cars'><option value=".$value['follow_status']."'>".$value['follow_status']."</option>
+                            <option value='zoom'>Zoom interview</option>
+                            <option value='meet'>Personal interview</option>
+                            <option value='phone'>phone is scheduled</option></select></td>
+                            <td><p><input type='text' id='start' name='trip-start'
+                            value='".$value['follow_date']."'
+                            </p></td>
                             <td><button id='update'>Update</button></td>
                             <td><button class='send_button'>Send recruiter an update</button></td>
                             </tr></form>";
                             
                         }
+        
                         
-                         
+
+           
                     } 
                     echo "</table>";
                     echo ('<form id="first_form" method="POST" action="home.php">');
