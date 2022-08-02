@@ -81,18 +81,23 @@ input.valid, textarea.valid {
     background-color: cadetblue;
 }
 table {
+    height: 100px;
+    margin-bottom: 10px;
     width: 100%;
-    text-align: left;
+    text-align: center;
+}
+table tr {
+    height: 20px;
+}
 
-
-  }
+  
 th, td {
     border: 1px solid;
-    height: 5px;
+    height: 10px;
   
   }
 table td p {
-    height: 5px;
+    height: 8px;
 }
 /* small devices (phones, 900px and down) */
 @media only screen and (max-width: 900px) {

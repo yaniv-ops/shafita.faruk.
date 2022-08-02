@@ -158,7 +158,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         $job_id = prepareData($value['job_id'], $conn);
                         $recruiter = pullRec($value['recruiter_id'], $conn);
                         foreach ($job_id as $jid) {
-                        
+                            $date_input = strtotime($value['follow_date']);
+                            echo date('d/m/Y', $date_input);
+                            $date = date('d/m/Y', $date_input);
                             $company = pullComp($jid['company_id'], $conn);                           
                             echo "<form><tr>
                             <td><p>".$jid['job_name']."</p></td>
@@ -168,14 +170,18 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             <td><p>".$recruiter['recruiter_email']."</p></td>
                             <td><p>".$recruiter['recruiter_phone']."</p></td>
                             <td><select id='cars' name='cars'><option value=".$value['follow_status']."'>".$value['follow_status']."</option>
+                            <option value='cv'>Cv has been sent</option>
                             <option value='zoom'>Zoom interview</option>
+                            <option value='mail'>Contact by mail</option>
+                            <option value='phone'>phone is scheduled</option>
                             <option value='meet'>Personal interview</option>
-                            <option value='phone'>phone is scheduled</option></select></td>
+                            <option value='onboard'>Onboard interview</option>
+                            </select></td>
                             <td><p><input type='text' id='start' name='trip-start'
-                            value='".$value['follow_date']."'
+                            value='".$date."'>
                             </p></td>
-                            <td><button id='update'>Update</button></td>
-                            <td><button class='send_button'>Send recruiter an update</button></td>
+                            <td><button id='update' name='update' type='submit' value='".$value['job_id']."'>Update</button></td>
+                            <td><button id='send_button' value='".$value['job_id']."'>Send recruiter an update</button></td>
                             </tr></form>";
                             
                         }

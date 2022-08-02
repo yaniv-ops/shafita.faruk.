@@ -17,7 +17,22 @@ $(document).ready(function () {
     close: function() {
         alert("closing");
     }});
-
+    var dialogb
+    dialogb = $("#dialog-form").dialog({
+        autoOpen: false,
+        resizable: true,
+        height: 400,
+        width: 350,
+        modal: true,
+        buttons: {
+            "Send email" : send_mail,
+            Cancel: function () {
+            dialogb.dialog("close");
+        }
+    },
+    close: function() {
+        alert("closing");
+    }});
     window.console && console.log('Document ready called');
     $('#addJob').click(function (event) {
         event.preventDefault();
@@ -121,12 +136,16 @@ $(document).ready(function () {
         
     }
 
-    $(".send_button").click(function (e) {
+    $("#send_button").click(function (e) {
         e.preventDefault();
         dialog.dialog("open");
         
 
     });
+    $('#update').click(function (e) {
+        e.preventDefault();
+        dialogb.dialog("open");
+    })
 
 });
 
