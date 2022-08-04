@@ -18,7 +18,7 @@ $(document).ready(function () {
         alert("closing");
     }});
     var dialogb
-    dialogb = $("#dialog-form").dialog({
+    dialogb = $("#dialog-formb").dialog({
         autoOpen: false,
         resizable: true,
         height: 400,
@@ -131,19 +131,28 @@ $(document).ready(function () {
 
     });
     function send_mail (e) {
-        alert("Soon available");
-        dialog.dialog("close");
+        
+        $('#update-form').submit();
+ 
         
     }
+        
+        
+        
 
-    $("#send_button").click(function (e) {
+
+    $(".send_button").click(function (e) {
         e.preventDefault();
+        var obj_id = $(this).val();
+        $('#input-hidden').val(obj_id);
         dialog.dialog("open");
         
 
     });
-    $('#update').click(function (e) {
+    $('.update').click(function (e) {
         e.preventDefault();
+        var obj_id = $(this).val();
+        $('#input-hiddenb').val(obj_id);
         dialogb.dialog("open");
     })
 

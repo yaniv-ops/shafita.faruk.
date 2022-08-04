@@ -81,9 +81,6 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
     ?>
 
     <h1>Slo-Rocking Horses</h1>
-    <div id='dialog-form' title='My jkhgjhkgjh dialog box'>
-        <div id='body'><textarea name="testArea" id="myarea" required rows="10"></textarea><br></div>
-    </div>
     <h1 id="scribble-top">A Job Helper</h1>
     <div class="wrapped-content">
         <img class="scroll" src="https://www.runescape.com/img/rsp777/scroll/backdrop_765_bottom.gif">
@@ -162,27 +159,18 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             echo date('d/m/Y', $date_input);
                             $date = date('d/m/Y', $date_input);
                             $company = pullComp($jid['company_id'], $conn);                           
-                            echo "<form><tr>
+                            echo "<tr>
                             <td><p>".$jid['job_name']."</p></td>
                             <td><p>".$jid['job_description']."</p></td>
                             <td><p>".$company['company_name']."</p></td>
                             <td><p>".$recruiter['recruiter_name']."</p></td>
                             <td><p>".$recruiter['recruiter_email']."</p></td>
                             <td><p>".$recruiter['recruiter_phone']."</p></td>
-                            <td><select id='cars' name='cars'><option value=".$value['follow_status']."'>".$value['follow_status']."</option>
-                            <option value='cv'>Cv has been sent</option>
-                            <option value='zoom'>Zoom interview</option>
-                            <option value='mail'>Contact by mail</option>
-                            <option value='phone'>phone is scheduled</option>
-                            <option value='meet'>Personal interview</option>
-                            <option value='onboard'>Onboard interview</option>
-                            </select></td>
-                            <td><p><input type='text' id='start' name='trip-start'
-                            value='".$date."'>
-                            </p></td>
-                            <td><button id='update' name='update' type='submit' value='".$value['job_id']."'>Update</button></td>
-                            <td><button id='send_button' value='".$value['job_id']."'>Send recruiter an update</button></td>
-                            </tr></form>";
+                            <td><p>".$value['follow_status']."</p></td>
+                            <td><p>".$date."</p></td>
+                            <td><button class='update' name='update' type='submit' value='".$value['job_id']."'>Update</button></td>
+                            <td><button class='send_button' value='".$value['job_id']."'>Send recruiter an update</button></td>
+                            </tr>";
                             
                         }
         
@@ -200,6 +188,26 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo "<input type='hidden' id='quit' name='quit' value='true'>";
                     echo "<input type='submit' name='Quit'>";
                     echo "</form>";
+                    echo "<div id='dialog-form' title='My jkhgjhkgjh dialog box'>
+                    <form id='send-form' method='POST' action='home.php'>
+                    <div id='body'><textarea name='testArea' id='mysend' required rows='10'></textarea><br></div>
+                    <input type='hidden' id='input-hidden' name='input-hidden'><br>
+                    </form>
+                    </div>
+                    <div id='dialog-formb' title='My second dialog box'>
+                    <form id='update-form' method='POST' action='home.php'>
+                    <div id='body'><select id='cars' name='cars'>
+                    <option value='cv'>Cv has been sent</option>
+                    <option value='zoom'>Zoom interview</option>
+                    <option value='mail'>Contact by mail</option>
+                    <option value='phone'>phone is scheduled</option>
+                    <option value='meet'>Personal interview</option>
+                    <option value='onboard'>Onboard interview</option>
+                    </select></div>
+                    <input type='date'>
+                    <input type='hidden' id='input-hiddenb' name='input-hiddenb'><br>
+                    </form>
+                    </div>";
                     }
                 }
                 
@@ -212,6 +220,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 
 
             ?>
+
+
 
 
         </div>
