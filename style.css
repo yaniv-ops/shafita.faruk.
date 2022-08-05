@@ -99,6 +99,19 @@ th, td {
 table td p {
     height: 8px;
 }
+
+
+select option:nth-child(8) {
+    background: rgba(17, 117, 4, 0.3);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+select option:nth-child(9) {
+    background: rgba(148, 5, 5, 0.3);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
 /* small devices (phones, 900px and down) */
 @media only screen and (max-width: 900px) {
     .wrapped-content {

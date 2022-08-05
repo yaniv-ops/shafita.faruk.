@@ -227,18 +227,19 @@ function validatePos($conn) {
 }
 
 function updateJobs($conn) {
-    $stmt = $conn->prepare('UPDATE Profile SET
-        first_name=:fn, last_name=:ln,
-        email=:em, headline=:he, summary=:su
-        WHERE profile_id=:pid AND user_id=:uid');
+    $date_follow = new DateTime($_POST['date']);
+    $date_result = $date_follow->format('Y-m-d');
+    $stmt = $conn->prepare('UPDATE job_offers SET
+        follow_status=:fs, follow_date=:fd,
+        last_checked_date=:lcd
+        WHERE job_offer_id=:jid');
+        
     $stmt->execute(array(
-        ':pid' => $_POST['username'],
-        ':uid' => $_POST['email'],
-        ':fn' => $_POST['first_name'],
-        ':ln' => $_POST['last_name'],
-        ':em' => $_POST['user_id'],
-        ':he' => $_POST['headline'],
-        ':su' => $_POST['summary']
+        ':jid' => $_POST['input-hiddenb'],
+        ':fs' => $_POST['cars'],
+        ':fd' => $date_result,
+        ':lcd' => $date_result
+
     ));    
 }
 

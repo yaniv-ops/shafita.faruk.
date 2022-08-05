@@ -121,6 +121,12 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     
                 }
                 if ($_SESSION['success'] === "Welcome Adventurer") {
+                    if (isset($_POST['cars'])) {
+                        updateJobs($conn);
+                        header('Location: home.php');
+
+
+                    }
                     
                     $row = showUserdata($_SESSION['username'], $conn);
                     if (count($row) == 0 ) {
@@ -196,15 +202,18 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     </div>
                     <div id='dialog-formb' title='My second dialog box'>
                     <form id='update-form' method='POST' action='home.php'>
-                    <div id='body'><select id='cars' name='cars'>
+                    <select id='cars' name='cars'>
+                    <option value='no'>No response</option>
                     <option value='cv'>Cv has been sent</option>
                     <option value='zoom'>Zoom interview</option>
                     <option value='mail'>Contact by mail</option>
                     <option value='phone'>phone is scheduled</option>
                     <option value='meet'>Personal interview</option>
                     <option value='onboard'>Onboard interview</option>
-                    </select></div>
-                    <input type='date'>
+                    <option value='accepted'>Job accepted</option>
+                    <option value='failed'>Job not accepted</option>
+                    </select>
+                    <input type='date' id='date' name='date'>
                     <input type='hidden' id='input-hiddenb' name='input-hiddenb'><br>
                     </form>
                     </div>";
