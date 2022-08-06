@@ -9,7 +9,7 @@ $(document).ready(function () {
         width: 350,
         modal: true,
         buttons: {
-            "hjjhghjgjhg" : send_mail,
+            "Send mail" : send_mail,
             Cancel: function () {
             dialog.dialog("close");
         }
@@ -25,7 +25,7 @@ $(document).ready(function () {
         width: 350,
         modal: true,
         buttons: {
-            "Update this job" : send_mail,
+            "Update this job" : updateJobs,
             Cancel: function () {
             dialogb.dialog("close");
         }
@@ -130,11 +130,15 @@ $(document).ready(function () {
         }
 
     });
-    function send_mail (e) {
+    function updateJobs (e) {
         
         $('#update-form').submit();
  
         
+    }
+    
+    function send_mail (e) {
+        $('#send-form').submit();
     }
         
         

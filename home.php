@@ -91,6 +91,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                 echo '<p style="color:green">' . $_SESSION['success'] . "</p>\n";
                 if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
                     echo '<p style="color:white">' . $_SESSION['username'] . "</p>\n";
+                    echo '<p style="color:white">' . $_SESSION['email'] . "</p>\n";
                 }
                 if ($_SESSION['success'] == "Welcome New Adventurer") {
                     
@@ -125,8 +126,11 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         updateJobs($conn);
                         header('Location: home.php');
 
-
-                    }
+                        }
+                    if (isset($_POST['testArea'])) {
+                        sendMail($conn, $_SESSION['email'], $_SESSION['username']);
+                        
+                    }    
                     
                     $row = showUserdata($_SESSION['username'], $conn);
                     if (count($row) == 0 ) {

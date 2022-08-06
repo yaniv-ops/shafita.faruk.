@@ -243,12 +243,13 @@ function updateJobs($conn) {
     ));    
 }
 
-function loadEdu($conn, $profile_id) {
-    $stmt = $conn->prepare('SELECT year,name FROM Education
-    JOIN Institution
-        ON Education.institution_id = Institution.institution_id
-    WHERE profile_id = :prof ORDER BY rank');
-    $stmt->execute(array(':prof' => $profile_id));
-    $educations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $educations;
+function sendMail($conn, $email, $username) {
+    $stmt = $conn->prepare('SELECT follow_status,follow_date FROM job_offers
+    WHERE job_offer_id = :jid');
+    $stmt->execute(array(':jid' => $_POST['input-hidden']));
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo "<h1>".$email."</h1>";
+    echo "<h1>".$username."</h1>";
+    echo "<h1>".$_POST['input-hidden']."</h1>";
+    echo "<h1>".$results."</h1>";
 }
