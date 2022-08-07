@@ -166,7 +166,6 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         $recruiter = pullRec($value['recruiter_id'], $conn);
                         foreach ($job_id as $jid) {
                             $date_input = strtotime($value['follow_date']);
-                            echo date('d/m/Y', $date_input);
                             $date = date('d/m/Y', $date_input);
                             $company = pullComp($jid['company_id'], $conn);                           
                             echo "<tr>
@@ -184,9 +183,6 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                             
                         }
         
-                        
-
-           
                     } 
                     echo "</table>";
                     echo ('<form id="first_form" method="POST" action="home.php">');

@@ -244,12 +244,24 @@ function updateJobs($conn) {
 }
 
 function sendMail($conn, $email, $username) {
-    $stmt = $conn->prepare('SELECT follow_status,follow_date FROM job_offers
+    $stmt = $conn->prepare('SELECT job_offers.follow_status, job_offers.follow_date, jobs.job_name,
+    companies.company_name, recruiters.recruiter_email
+    FROM job_offers JOIN jobs JOIN companies JOIN recruiters ON jobs.job_id = job_offers.job_id AND
+    companies.company_id = jobs.company_id AND recruiters.recruiter_id = job_offers.recruiter_id
     WHERE job_offer_id = :jid');
     $stmt->execute(array(':jid' => $_POST['input-hidden']));
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($results as $result) {
+        $format_date = date('d-m-Y',strtotime($result['follow_date']));
+
     echo "<h1>".$email."</h1>";
     echo "<h1>".$username."</h1>";
     echo "<h1>".$_POST['input-hidden']."</h1>";
-    echo "<h1>".$results."</h1>";
+    echo "<h1>".$result['follow_status']."</h1>";
+    echo "<h1>".$format_date."</h1>";
+    echo "<h1>".$result['job_name']."</h1>";
+    echo "<h1>".$result['company_name']."</h1>";
+    echo "<h1>".$result['recruiter_email']."</h1>";
+}
 }
