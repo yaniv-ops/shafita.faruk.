@@ -43,11 +43,11 @@ $(document).ready(function () {
         countpos++;
         window.console && console.log("Adding Job offer:" + countpos);
         $('#position_fields').append(
-            '<div id="job_offer' + countpos + '"> \
-            <div><p>Job Position: <input type="text" id="contact_pos' + countpos + '" name="pos' + countpos + '"/> \
-            <span class="error">Field is required</span></div> \
+            '<div class="jobs" id="job_offer' + countpos + '"> \
+            <div class="head-form"><p>Job Position: </p><input type="text" id="contact_pos' + countpos + '" name="pos' + countpos + '"/> \
+            <span class="error">Field is required</span> \
             <input type=""button" value="-" \
-                onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></p> \
+                onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></div> \
             <div><p>Job Description: <textarea id="contact_desc' + countpos + '" name="desc' + countpos + '" rows="8" cols="80"></textarea>\
             <span class="error">Field is required</span></div></p>  \
             <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" class=company_name value=""/>\

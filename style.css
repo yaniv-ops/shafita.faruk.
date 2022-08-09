@@ -84,7 +84,7 @@ table {
     height: 100px;
     margin-bottom: 10px;
     width: 100%;
-    text-align: center;
+
 }
 table tr {
     height: 20px;
@@ -100,6 +100,22 @@ table td p {
     height: 8px;
 }
 
+.head-form {
+    display: flex;
+    justify-content: center;
+    
+    gap: 5px;
+}
+
+.head-form p {
+margin-top: 5px;
+height: 8px;
+}
+
+button#addJob {
+    color:blue;
+    margin-left: 5px;
+}
 
 select option:nth-child(8) {
     background: rgba(17, 117, 4, 0.3);
