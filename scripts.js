@@ -46,7 +46,7 @@ $(document).ready(function () {
             '<div class="jobs" id="job_offer' + countpos + '"> \
             <div class="head-form"><p>Job Position: </p><input type="text" id="contact_pos' + countpos + '" name="pos' + countpos + '"/> \
             <span class="error">Field is required</span> \
-            <input type=""button" value="-" \
+            <input type="button" value="-" \
                 onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></div> \
             <div><p>Job Description: <textarea id="contact_desc' + countpos + '" name="desc' + countpos + '" rows="8" cols="80"></textarea>\
             <span class="error">Field is required</span></div></p>  \
