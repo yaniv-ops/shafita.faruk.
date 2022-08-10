@@ -44,7 +44,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 <html lang="en">
 
 <head>
-    <title>Form Validation</title>
+    <title>Jobscape</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -80,8 +80,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 
     ?>
 
-    <h1>Slo-Rocking Horses</h1>
+    <h1>JOBSCAPE</h1>
     <h1 id="scribble-top">A Job Helper</h1>
+    <img src="https://www.runescape.com/img/rsp777/grand_exchange/title.png">
     <div class="wrapped-content">
         <img class="scroll" src="https://www.runescape.com/img/rsp777/scroll/backdrop_765_bottom.gif">
         <div class="contents-table">
@@ -100,16 +101,16 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     $msg = $_SESSION['success'];
                     session_destroy();
                     echo '<h1>Would you Like to register as a new user?</h1>';
-                    echo "<form method='POST' action='home.php'>";
+                    echo "<div id='form-reg'><form method='POST' action='home.php'>";
                     echo '<input type="hidden" id="username"  name="username" value=' . $username . '>';
                     echo '<input type="hidden" id="email" name="email" value=' . $email . '>';
                     echo "<input type='hidden' id='new_user' name='new_user' value='true'>";
-                    echo "<input type='submit' name='submit'>";
+                    echo "<input class='reg-button' value='Yes,let me in' type='submit' name='submit'>";
                     echo "</form>";
                     echo "<form method='POST' action='home.php'";
                     echo "<input type='hidden' id='quit' name='quit' value='true'>";
-                    echo "<input type='submit' name='Quit'>";
-                    echo "</form>";
+                    echo "<input class='reg-button' value='Nope' type='submit' name='Quit'>";
+                    echo "</form></div>";
                     
                 }
                 if ($_SESSION['success'] == "Adventurer has been added!") {
@@ -117,7 +118,7 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo "<h3>Re-enter with the username and e-mail you have registered</h3>";
                     echo "<form method='POST' action='home.php'";
                     echo "<input type='hidden' id='quit' name='quit' value='true'>";
-                    echo "<input type='submit' name='Quit'>";
+                    echo "<input class='reg-button' value='Press to re-enter' type='submit' name='Quit'>";
                     echo "</form>";
                     
                 }
@@ -140,16 +141,12 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                         echo ('<form id="first_form" method="POST" action="home.php">');
                         echo ('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
                         echo ('<div id="position_fields"></div>');
-                        echo '<h1>what</h1>';
-                        echo ('<input type="submit" id="first_form_submit" name="submit">Submit</button>');
+                        echo ('<input value="Submit jobs" type="submit" id="first_form_submit" name="submit">');
+                        echo "<input type='submit' id='quit' value='Quit' name='Quit'>";
                         echo ('</form>');
-                        echo "<form method='POST' action='home.php'";
+                        echo ('<form method="POST" action="home.php">');
                         echo "<input type='hidden' id='cancel' name='cancel' value='true'>";
-                        echo "<input type='submit' name='Cancel'>";
-                        echo "</form>";
-                        echo "<form method='POST' action='home.php'";
-                        echo "<input type='hidden' id='quit' name='quit' value='true'>";
-                        echo "<input type='submit' name='Quit'>";
+                        echo "<input value='Cancel' type='submit' name='Cancel'>";
                         echo "</form>";
                         
                     } else {
@@ -188,11 +185,15 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
                     echo ('<form id="first_form" method="POST" action="home.php">');
                     echo ('<p id="bacon">Add Job offer: <button id="addJob" >+</button></p>');
                     echo ('<div id="position_fields"></div>');
-                    echo ('<input type="submit" id="first_form_submit" name="submit">Submit</button>');
-                    echo ('</form>');
+                    echo ('<div class="buttom-buttons"><input type="submit" id="first_form_submit" value="Submit jobs" name="submit">');
                     echo "<form method='POST' action='home.php'";
-                    echo "<input type='hidden' id='quit' name='quit' value='true'>";
-                    echo "<input type='submit' name='Quit'>";
+                    echo "<input type='hidden' name='quit' value='true'>";
+                    echo "<input type='submit' id='quit' value='Quit' name='Quit'>";
+                    echo "</form></div>";
+                    echo ('</form>');
+                    echo ('<form method="POST" action="home.php">');
+                    echo "<input type='hidden' id='cancel' name='cancel' value='true'>";
+                    echo "<input value='Cancel' type='submit' name='Cancel'>";
                     echo "</form>";
                     echo "<div id='dialog-form' title='My jkhgjhkgjh dialog box'>
                     <form id='send-form' method='POST' action='home.php'>
@@ -228,12 +229,9 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
             }
 
 
-            ?>
-
-
-
-
+            ?>            
         </div>
+        <img  id="bottom-scroll" class="scroll" src="https://www.runescape.com/img/rsp777/scroll/backdrop_765_bottom.gif">
     </div>
 
 </body>

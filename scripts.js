@@ -44,19 +44,19 @@ $(document).ready(function () {
         window.console && console.log("Adding Job offer:" + countpos);
         $('#position_fields').append(
             '<div class="jobs" id="job_offer' + countpos + '"> \
-            <div class="head-form"><p>Job Position: </p><input type="text" id="contact_pos' + countpos + '" name="pos' + countpos + '"/> \
+            <div class="head-form"><p>Job Position:&nbsp;&nbsp;</p><input type="text" id="contact_pos' + countpos + '" name="pos' + countpos + '"/> \
             <span class="error">Field is required</span> \
             <input type="button" value="-" \
                 onclick="$(\'#job_offer'+ countpos + '\').remove();countpos--;return false;"></div> \
-            <div><p>Job Description: <textarea id="contact_desc' + countpos + '" name="desc' + countpos + '" rows="8" cols="80"></textarea>\
+            <div class="bottom-form"><div class="text-form"><p><p>Job Description:&nbsp;&nbsp;</p><textarea id="contact_desc' + countpos + '" name="desc' + countpos + '" rows="8" cols="30"></textarea>\
             <span class="error">Field is required</span></div></p>  \
-            <div><p>Company Name: <input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" class=company_name value=""/>\
+            <div class="bottom-bottom-form"><p>Company Name:&nbsp;&nbsp;<input type="text" id="contact_comp' + countpos + '" name="comp' + countpos + '" class=company_name value=""/>\
             <span class="error">Field is required</span></p>\
-            <p>Recruiter: <input type="text" id="contact_rec' + countpos + '" name="rec' + countpos + '" value=""/><span class="error">Field is required</span></p> \
-            <p>Recruiter E-mail: <input type="text" id="contact_rec-mail' + countpos + '" name="rec-mail' + countpos + '" value=""/><span class="error">Field is required</span></p>\
-            <p>Recruiter Phone: <input type="text" id="contact_rec-phone' + countpos + '" name="rec-phone' + countpos + '" value=""/><span class="error">Field is required</span></p> \
+            <p>Recruiter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="contact_rec' + countpos + '" name="rec' + countpos + '" value=""/><span class="error">Field is required</span></p> \
+            <p>Recruiter E-mail:&nbsp; <input type="text" id="contact_rec-mail' + countpos + '" name="rec-mail' + countpos + '" value=""/><span class="error">Field is required</span></p>\
+            <p>Recruiter Phone:&nbsp; <input type="text" id="contact_rec-phone' + countpos + '" name="rec-phone' + countpos + '" value=""/><span class="error">Field is required</span></p> \
             <span class="error">Field is required</span></p> \
-            </div>');
+            </div></div></div>');
         $("#contact_pos" + countpos).on('input', function () {
             var input = $(this);
             var is_name = input.val();
