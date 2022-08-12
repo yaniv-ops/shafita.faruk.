@@ -27,7 +27,8 @@ p {
     color: yellowgreen;
     font-family: 'Oleo Script Swash Caps', cursive;
     position: relative;
-    bottom: 50px;
+    bottom
+    : 50px;
     
     }  
 

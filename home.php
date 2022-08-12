@@ -129,8 +129,8 @@ if (!isset($_SESSION['success']) && !isset($_SESSION['error'])) {
 
                         }
                     if (isset($_POST['testArea'])) {
-                        sendMail($conn, $_SESSION['email'], $_SESSION['username']);
-                        
+                        sendMail($conn, $_SESSION['email'], $_SESSION['username'], $_POST['testArea']);
+                        echo "<script>alert('E-mail was sent to recruiter')</script>";
                     }    
                     
                     $row = showUserdata($_SESSION['username'], $conn);

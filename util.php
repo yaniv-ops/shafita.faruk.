@@ -243,7 +243,8 @@ function updateJobs($conn) {
     ));    
 }
 
-function sendMail($conn, $email, $username) {
+function sendMail($conn, $email, $username, $msg) {
+    
     $stmt = $conn->prepare('SELECT job_offers.follow_status, job_offers.follow_date, jobs.job_name,
     companies.company_name, recruiters.recruiter_email
     FROM job_offers JOIN jobs JOIN companies JOIN recruiters ON jobs.job_id = job_offers.job_id AND
@@ -251,10 +252,32 @@ function sendMail($conn, $email, $username) {
     WHERE job_offer_id = :jid');
     $stmt->execute(array(':jid' => $_POST['input-hidden']));
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    $headers_test = 'From: <test@test.com>' . "\r\n" .
+'BCC: <fred@test.com>' . "\r\n" .
+'Reply-To: <test@test.com>';
+    $headers="From: <test@test.com>"."\r\n";
+    $headers.="Reply-To: <test@test.com>"."\r\n";
+    $headers.="Content-type:text/html;charset=UTF-8"."\r\n";
+    $subject="An update regarding a recruit";
+    
     foreach ($results as $result) {
         $format_date = date('d-m-Y',strtotime($result['follow_date']));
-
+        $headers.="From:"."'$username'"."\r\n";
+        $headers.="E-mail:"."'$email'"."\r\n";
+        $body_msg = "<html><h5>This is un update regarding a job offer<h5/>
+                    <p>$msg</p>
+                    <h4>".$result['job_name']."</h4>
+                    <h4>".$result['company_name']."</h4>
+                    <h4>".$result['follow_status']."</h4>
+                    <h4>".$format_date."</h4>
+                    <h5>Was sent through Jobscape system</h5>
+            </html>";
+            mail('yaniv.ayalon@yahoo.com', $subject, $body_msg, $headers);
+        $success=mail($result['recruiter_email'], $subject, $body_msg, $headers);
+        if ($success) {
+            echo "<h1>SUCCESSS</h1>";
+        }    
+    echo "<h1>".$msg."</h1>";
     echo "<h1>".$email."</h1>";
     echo "<h1>".$username."</h1>";
     echo "<h1>".$_POST['input-hidden']."</h1>";
